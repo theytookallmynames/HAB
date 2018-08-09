@@ -46,7 +46,7 @@ void setup() {
     }
   }
 
-  print("Type,Time,Latitude,Longitude,Quality,Number Of Satellites,Horizontal Dilution of Precision (HDOP),Altitude,Height of geoid above WGS84 ellipsoid,DGPS reference station id,Checksum");
+  print("Type,Time,Latitude,Longitude,Quality,Number Of Satellites,Horizontal Dilution of Precision (HDOP),Altitude,Height of geoid above WGS84 ellipsoid,DGPS reference station id,Checksum,Door Status");
   mySerial.begin(4800);
   Serial.println("Ready!");
 }
@@ -73,11 +73,11 @@ void print(String x){
 }
 
 void openDoor(){
-  print("ALTITUDE REACHED: OPEN DOOR");
+
 }
 
 void closeDoor(){
-  print("ALTITUDE REACHED: CLOSE DOOR");
+
 }
 
 void loop() {
@@ -138,14 +138,14 @@ void loop() {
             break;
         }
         if((newLine.lng == "") != 1){
-          print(newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum);
+
           if(newLine.altitude.toInt() > MOTOR_TRIGGER_ALTITUDE){
-            print(newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + "OPEN DOOR");
+            print(newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + "1");
             openDoor();
           }
           if(newLine.altitude.toInt() < MOTOR_TRIGGER_ALTITUDE){
             print(
-              newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + "CLOSE DOOR"
+              newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + "0"
             );
             closeDoor();
           }
