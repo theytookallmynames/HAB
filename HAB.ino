@@ -46,12 +46,13 @@ void setup() {
     }
   }
 
-  print("Type,Time,Latitude,Longitude,Quality,Number Of Satellites,Horizontal Dilution of Precision (HDOP),Altitude,Height of geoid above WGS84 ellipsoid,DGPS reference station id,Checksum,Door Status");
+  print("Type,Time,Latitude,Longitude,Quality,Number Of Satellites,Horizontal Dilution of Precision (HDOP),Altitude,Height of geoid above WGS84 ellipsoid,DGPS reference station id,Checksum,Temp 1 (A1), Temp 1 (A1 RAW), Temp 2 (A2), Temp 2 (A2 RAW),Door Status");
   mySerial.begin(4800);
   Serial.println("Ready!");
 }
 
 struct singleLineParsed{
+  String full;
   String type;
   String time;
   String lat;
@@ -81,12 +82,17 @@ void closeDoor(){
 }
 
 void loop() {
+//  Serial.println(getTemp(analogRead(A1), 5));
+//  Serial.println(getTemp(analogRead(A2), 5));
   if (mySerial.available()) {
     char x = (char) mySerial.read();
     if(x == '\n'){
       singleLineParsed newLine;
       if(singleLine.substring(0, 10).indexOf("$GPGGA") != -1){
         for(int i = 0; i < 20; i++){
+          if(i == 0){
+            newLine.full = singleLine;
+          }
           int split = singleLine.indexOf(",");
           String y = singleLine.substring(0, split);
           singleLine = singleLine.substring(split + 1, singleLine.length());
@@ -140,15 +146,22 @@ void loop() {
         if((newLine.lng == "") != 1){
 
           if(newLine.altitude.toInt() > MOTOR_TRIGGER_ALTITUDE){
-            print(newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + "1");
+            print(newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "1");
+//            Serial.println(getTemp(analogRead(A0), 5));
+//            Serial.println(getTemp(analogRead(A1), 5));
+//            Serial.println(getTemp(analogRead(A2), 5));
             openDoor();
           }
           if(newLine.altitude.toInt() < MOTOR_TRIGGER_ALTITUDE){
             print(
-              newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + "0"
+              newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "0"
             );
+//            Serial.println(getTemp(analogRead(A0), 5));
+//            Serial.println(getTemp(analogRead(A1), 5));
+//            Serial.println(getTemp(analogRead(A2), 5));
             closeDoor();
           }
+//          Serial.println(analogRead(A0));
         }
       }
       singleLine = "";
