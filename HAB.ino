@@ -38,14 +38,14 @@ void setup() {
     return;
   }
   Serial.println("card initialized.");
-  
+
   for (uint8_t i = 0; i < 1000; i++) {
     if(!SD.exists(fileName + i + ".csv")){
       fileName = fileName + i + ".csv";
       break;
     }
   }
-  
+
   print("Type,Time,Latitude,Longitude,Quality,Number Of Satellites,Horizontal Dilution of Precision (HDOP),Altitude,Height of geoid above WGS84 ellipsoid,DGPS reference station id,Checksum");
   mySerial.begin(4800);
   Serial.println("Ready!");
@@ -140,11 +140,14 @@ void loop() {
         if((newLine.lng == "") != 1){
           print(newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum);
           if(newLine.altitude.toInt() > MOTOR_TRIGGER_ALTITUDE){
+            print(newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + "OPEN DOOR");
             openDoor();
           }
           if(newLine.altitude.toInt() < MOTOR_TRIGGER_ALTITUDE){
+            print(
+              newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + "CLOSE DOOR"
+            );
             closeDoor();
-            done = true;
           }
         }
       }
@@ -154,4 +157,3 @@ void loop() {
     }
   }
 }
-
