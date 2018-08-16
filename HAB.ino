@@ -78,6 +78,35 @@ struct singleLineParsed {
   String checkSum;
 };
 
+struct altitudeAverage {
+    int altitudes[60];
+    int currentLocation = 0;
+    double average;
+
+    altitudeAverage(){
+        for(int i = 0; i < 60; i++){
+            altitudes[i] = -1;
+        }
+    }
+
+    void addAltitude(const int newVal){
+        altitudes[currentLocation] = newVal;
+        currentLocation++;
+        if(currentLocation == 60){
+            currentLocation = 0;
+        }
+    }
+
+    int getAverage(){
+        int total;
+        for(int i = 0; i < 60; i++){
+            if(altitudes[i] !== -1)
+                total += altitudes[i];
+        }
+        return total/60;
+    }
+}
+
 void SDwrite(String x) {
   Serial.println(x);
   logfile = SD.open(fileName, FILE_WRITE);
@@ -156,56 +185,26 @@ void loop() {
             case 14:
               newLine.DGPS_reference = singleLine.substring(0, 4);
               newLine.checkSum = singleLine.substring(4, singleLine.length() - 1);
+
+              y_2 = newLine.altitude.toInt();
+              delta = y_2 - y_1;
+              y_1 = y_2;
+
+              if(y_1 > MOTOR_TRIGGER_ALTITUDE){
+                  SDwrite(
+                      newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "1" + "," + delta
+                  );
+                  openDoor();
+              }else{
+                    SDwrite(
+                        newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "0" + "," + delta
+                    );
+              }
               break;
           }
 
           if (singleLine.length() == 0)
             break;
-        }
-        if ((newLine.lng == "") != 1) {
-
-
-          if (flag){
-            y_2 = newLine.altitude.toInt();
-            delta = y_2 - y_1;
-             //preserve the last value of Y
-            y_1 = y_2;
-
-            if (delta > 0){
-                if (newLine.altitude.toInt() > MOTOR_TRIGGER_ALTITUDE) {
-                  SDwrite(
-                    newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "1");
-                  //            Serial.println(getTemp(analogRead(A0), 5));
-                  //            Serial.println(getTemp(analogRead(A1), 5));
-                  //            Serial.println(getTemp(analogRead(A2), 5));
-                  //            openDoor();
-                }
-            }
-
-          }else{
-
-              if (delta < 1){
-                y_2 = newLine.altitude.toInt();
-                delta = y_2 - y_1;
-                //preserve the last value of Y
-                y_1 = y_2;
-
-                if (newLine.altitude.toInt() < MOTOR_TRIGGER_ALTITUDE) {
-                  SDwrite(
-                    newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "0"
-                  );
-                  //            Serial.println(getTemp(analogRead(A0), 5));
-                  //            Serial.println(getTemp(analogRead(A1), 5));
-                  //            Serial.println(getTemp(analogRead(A2), 5));
-                  //            closeDoor();
-                }
-              }
-            }
-
-
-
-
-          //          Serial.println(analogRead(A0));
         }
       }
       singleLine = "";
