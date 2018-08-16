@@ -10,6 +10,7 @@
 #include "StemHab.h"
 
 const int MOTOR_TRIGGER_ALTITUDE = 46;
+int delta, y_1, y_2 =0;
 
 void SDwrite();
 void openDoor();
@@ -40,6 +41,10 @@ void setup() {
 
 
   pinMode(chipSelect, OUTPUT);
+  pinMode(motor_one_p1, OUTPUT);
+  pinMode(motor_one_p2, OUTPUT);
+  pinMode(motor_two_p1, OUTPUT);
+  pinMode(motor_two_p2, OUTPUT);
   if (!SD.begin(chipSelect)) {
     Serial.println("Card failed, or not present");
     return;
@@ -81,10 +86,10 @@ void SDwrite(String x) {
 }
 
 void openDoor() {
-  digitalWrite(A4, HIGH);
-  digitalWrite(12, LOW);
-  digitalWrite(A5, HIGH);
-  digitalWrite(11, LOW);
+  digitalWrite(motor_one_p1, HIGH);
+  digitalWrite(motor_one_p2, LOW);
+  digitalWrite(motor_two_p1, HIGH);
+  digitalWrite(motor_two_p2, LOW);
 }
 
 void closeDoor() {
@@ -97,7 +102,7 @@ void closeDoor() {
 void loop() {
   //  Serial.println(getTemp(analogRead(A1), 5));
   //  Serial.println(getTemp(analogRead(A2), 5));
-  openDoor();
+  // openDoor();
   if (mySerial.available()) {
     char x = (char) mySerial.read();
     if (x == '\n') {
@@ -159,23 +164,47 @@ void loop() {
         }
         if ((newLine.lng == "") != 1) {
 
-          if (newLine.altitude.toInt() > MOTOR_TRIGGER_ALTITUDE) {
-            SDwrite(
-              newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "1");
-            //            Serial.println(getTemp(analogRead(A0), 5));
-            //            Serial.println(getTemp(analogRead(A1), 5));
-            //            Serial.println(getTemp(analogRead(A2), 5));
-//            openDoor();
-          }
-          if (newLine.altitude.toInt() < MOTOR_TRIGGER_ALTITUDE) {
-            SDwrite(
-              newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "0"
-            );
-            //            Serial.println(getTemp(analogRead(A0), 5));
-            //            Serial.println(getTemp(analogRead(A1), 5));
-            //            Serial.println(getTemp(analogRead(A2), 5));
-//            closeDoor();
-          }
+
+          if (flag){
+            y_2 = newLine.altitude.toInt();
+            delta = y_2 - y_1;
+             //preserve the last value of Y
+            y_1 = y_2;
+
+            if (delta > 0){
+                if (newLine.altitude.toInt() > MOTOR_TRIGGER_ALTITUDE) {
+                  SDwrite(
+                    newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "1");
+                  //            Serial.println(getTemp(analogRead(A0), 5));
+                  //            Serial.println(getTemp(analogRead(A1), 5));
+                  //            Serial.println(getTemp(analogRead(A2), 5));
+                  //            openDoor();
+                }
+            }
+
+          }else{
+
+              if (delta < 1){
+                y_2 = newLine.altitude.toInt();
+                delta = y_2 - y_1;
+                //preserve the last value of Y
+                y_1 = y_2;
+
+                if (newLine.altitude.toInt() < MOTOR_TRIGGER_ALTITUDE) {
+                  SDwrite(
+                    newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "0"
+                  );
+                  //            Serial.println(getTemp(analogRead(A0), 5));
+                  //            Serial.println(getTemp(analogRead(A1), 5));
+                  //            Serial.println(getTemp(analogRead(A2), 5));
+                  //            closeDoor();
+                }
+              }
+            }
+
+
+
+
           //          Serial.println(analogRead(A0));
         }
       }
