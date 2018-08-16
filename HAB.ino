@@ -6,8 +6,24 @@
 #include <SPI.h>
 #include <SD.h>
 #include <SoftwareSerial.h>
-#include <Adafruit_GPS.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
 #include "StemHab.h"
+
+
+
+
+// Data wire is plugged into pin 14 on the Arduino
+#define ONE_WIRE_BUS 14
+
+// Setup a oneWire instance to communicate with any OneWire devices
+// (not just Maxim/Dallas temperature ICs)
+OneWire oneWire(ONE_WIRE_BUS);
+
+// Pass our oneWire reference to Dallas Temperature.
+DallasTemperature sensors(&oneWire);
+
+
 
 const int MOTOR_TRIGGER_ALTITUDE = 46;
 int delta, y_1, y_2 =0;
@@ -29,12 +45,14 @@ String singleLine = "";
 
 File logfile;
 String fileName = "GPSLOG";
-bool flag = true;
+bool flag = false;
 bool done = false;
 
 void setup() {
   Serial.begin(9600);
   Serial.print("Initializing SD card...");
+  // Start up the library - Dallas Temperature
+  sensors.begin();
   while (!Serial) {
     ;
   }
@@ -58,7 +76,7 @@ void setup() {
     }
   }
 
-  SDwrite("Type,Time,Latitude,Longitude,Quality,Number Of Satellites,Horizontal Dilution of Precision (HDOP),Altitude,Height of geoid above WGS84 ellipsoid,DGPS reference station id,Checksum,Temp 1 (A1), Temp 1 (A1 RAW), Temp 2 (A2), Temp 2 (A2 RAW),Door Status");
+  SDwrite("Type,Time,Latitude,Longitude,Quality,Number Of Satellites,Horizontal Dilution of Precision (HDOP),Altitude,Height of geoid above WGS84 ellipsoid,DGPS reference station id,Checksum,Temp 1 (0), Temp 1 (Index 0 RAW), Temp 2 (1), Temp 2 (Index 1 RAW),Temp 3 (2), Temp 2 (Index 2 RAW),Door Status");
   mySerial.begin(4800);
   Serial.println("Ready!");
 }
@@ -115,6 +133,7 @@ void SDwrite(String x) {
 }
 
 void openDoor() {
+  flag = true;
   digitalWrite(motor_one_p1, HIGH);
   digitalWrite(motor_one_p2, LOW);
   digitalWrite(motor_two_p1, HIGH);
@@ -129,9 +148,7 @@ void closeDoor() {
 }
 
 void loop() {
-  //  Serial.println(getTemp(analogRead(A1), 5));
-  //  Serial.println(getTemp(analogRead(A2), 5));
-  // openDoor();
+
   if (mySerial.available()) {
     char x = (char) mySerial.read();
     if (x == '\n') {
@@ -192,13 +209,19 @@ void loop() {
 
               if(y_1 > MOTOR_TRIGGER_ALTITUDE){
                   SDwrite(
-                      newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "1" + "," + delta
+                      newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + sensors.getTempCByIndex(0) + "," + sensors.getTempCByIndex(0) + "," + sensors.getTempCByIndex(1) + "," + sensors.getTempCByIndex(1) + "," +
+                      sensors.getTempCByIndex(2) + "," + sensors.getTempCByIndex(2) + "," +
+                      "1" + "," + delta
                   );
                   openDoor();
               }else{
                     SDwrite(
-                        newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + getTemp(analogRead(A1), 5) + "," + analogRead(A1) + "," + getTemp(analogRead(A2), 5) + "," + analogRead(A2) + "," + "0" + "," + delta
+                        newLine.type + "," + newLine.time + "," + newLine.lat + "," + newLine.lng + "," + newLine.quality + "," + newLine.numOfSatellites + "," + newLine.HDOP + "," + newLine.altitude + "," + newLine.WGS84_ellipsoid + "," + newLine.DGPS_reference + "," + newLine.checkSum + "," + sensors.getTempCByIndex(0) + "," + sensors.getTempCByIndex(0) + "," + sensors.getTempCByIndex(1) + "," + sensors.getTempCByIndex(1) + "," +
+                        sensors.getTempCByIndex(2) + "," + sensors.getTempCByIndex(2) + "," + "0" + "," + delta
                     );
+                    if(flag){
+                      closeDoor();
+                    }
               }
               break;
           }
