@@ -1,3 +1,8 @@
+/**
+ * Note: this file is a remnant from a previous iteration of the balloon and is no longer used.
+ *  - Vito 02/15/19
+ */
+
 // Stem High Altitude Balloon Project 2017
 // Modified for Stem High Altitude Balloon 2018 by Joshua Grebler
 
