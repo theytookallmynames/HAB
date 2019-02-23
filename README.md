@@ -5,7 +5,7 @@ High altitude balloon project for Bergen's 2018 STEM program
 
 1. Clone this repo.
 2. Install the Arduino IDE: https://www.arduino.cc/en/main/software
-3. Open the repo in the IDE
+3. Open the `HAB` directory in the repo in the IDE
 4. Follow [these instructions](https://learn.adafruit.com/adafruit-feather-32u4-basic-proto/arduino-ide-setup) to install the "Adafruit AVR Boards" package in the IDE, and then set the board for the sketch to "Adafruit Feather 32u4" under the Tools > Boards menu.
 
 You may need to install some additional libraries. To do that, go to the Tools menu in the Arduino IDE, search for the missing libraries, and hit the install button.
