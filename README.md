@@ -6,7 +6,7 @@ High altitude balloon project for Bergen's 2018 STEM program
 1. Clone this repo.
 2. Install the Arduino IDE: https://www.arduino.cc/en/main/software
 3. Open the `HAB` directory in the repo in the IDE
-4. Follow [these instructions](https://learn.adafruit.com/adafruit-feather-32u4-basic-proto/arduino-ide-setup) to install the "Adafruit AVR Boards" package in the IDE, and then set the board for the sketch to "Adafruit Feather 32u4" under the Tools > Boards menu.
+4. Follow [these instructions](https://learn.adafruit.com/adafruit-feather-32u4-basic-proto/arduino-ide-setup) to install the "Adafruit AVR Boards" package in the IDE, and then set the board for the sketch to "Adafruit Feather M0" under the Tools > Boards menu.
 
 You may need to install some additional libraries. To do that, go to the Tools menu in the Arduino IDE, search for the missing libraries, and hit the install button.
 
@@ -16,32 +16,29 @@ In the Arduino IDE, hit the checkmark button at the top of the window (or select
 
 ## Installing on the arduino
 
-TODO
+In the Arduino IDE, press the button with the arrow (next to the button with the checkmark). If the code verifies properly, it will get uploaded to the Arduino and the Arduino will restart with the new code.
 
 ## Hardware
 
+See the docs folder for datasheets.
+
 ### Board
 
-Adafruit Feather 32u4
+Adafruit Feather M0 Adalogger
 
-https://learn.adafruit.com/adafruit-feather-32u4-bluefruit-le/overview
+https://learn.adafruit.com/adafruit-feather-m0-adalogger/overview
 
 ### Sensors
 
-#### Temperature sensors (3x)
+#### Temperature sensor
 
-Onboard: Velleman VMA320 analog temperature sensor module. Connected to port A0 on board.
+Velleman VMA320 analog temperature sensor module
 
-Inside payload container: Maxim DS18B20 digital thermometer. Connected to port A2 on board.
+#### Pressure sensor
 
-Outside payload container: Maxim DS18B20 digital thermometer. Connected to port A3 on board.
+Honeywell HSCRNN1.6BA2A3
 
-#### Pressure sensor (1x)
+#### GPS receiver
 
-Honeywell SIP RN. Pin 3 connected to SDA, pin 4 connected to SCL.
-
-#### GPS receiver (1x)
-
-NaviSys GM-401
-
-#### Door motor (1x)
+Byonics GPS5HAOEM module
+NaviSys GM-401 SiRFstarIV chip
