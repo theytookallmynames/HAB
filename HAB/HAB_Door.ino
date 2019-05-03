@@ -9,12 +9,16 @@ bool isClosing = false;
 
 void init() {
   // The door switch pins are in pullup mode, and are tied to ground when the switches close.
-  pinMode(DOOR_SWITCH_FRONT_PIN, INPUT_PULLUP);
-  pinMode(DOOR_SWITCH_REAR_PIN, INPUT_PULLUP);
+  pinMode(DOOR_1_SWITCH_FRONT_PIN, INPUT_PULLUP);
+  pinMode(DOOR_1_SWITCH_REAR_PIN, INPUT_PULLUP);
+  pinMode(DOOR_2_SWITCH_FRONT_PIN, INPUT_PULLUP);
+  pinMode(DOOR_2_SWITCH_REAR_PIN, INPUT_PULLUP);
 
   pinMode(MOTOR_DRIVER_ENABLE_PIN, OUTPUT);
-  pinMode(MOTOR_DRIVER_FORWARD_PIN, OUTPUT);
-  pinMode(MOTOR_DRIVER_REVERSE_PIN, OUTPUT);
+  pinMode(MOTOR_1_DRIVER_FORWARD_PIN, OUTPUT);
+  pinMode(MOTOR_1_DRIVER_REVERSE_PIN, OUTPUT);
+  pinMode(MOTOR_2_DRIVER_FORWARD_PIN, OUTPUT);
+  pinMode(MOTOR_2_DRIVER_REVERSE_PIN, OUTPUT);
 
   Logging::logSystemData("Door initialized");
 }
@@ -32,10 +36,12 @@ void init() {
  * switches is open. This state indicates that the door is currently opening or closing.
  *
  * TODO: I think the indeterminate state can probably be removed (it's also not currently implemented).
+ *
+ * TODO: This currently only handles DOOR_1, needs to handle DOOR_2 as well.
  */
 DoorStatus getDoorStatus() {
-  int frontDoorStatus = digitalRead(DOOR_SWITCH_FRONT_PIN);
-  int rearDoorStatus = digitalRead(DOOR_SWITCH_REAR_PIN);
+  int frontDoorStatus = digitalRead(DOOR_1_SWITCH_FRONT_PIN);
+  int rearDoorStatus = digitalRead(DOOR_1_SWITCH_REAR_PIN);
 
   if (frontDoorStatus == LOW && rearDoorStatus == LOW) {
     return DOOR_CLOSED;
@@ -63,14 +69,17 @@ DoorStatus getDoorStatus() {
 //   delay(1000); */
 // }
 
+// TODO: This currently only handles DOOR_1, needs to handle DOOR_2 as well.
 void stopMotor() {
-  digitalWrite(MOTOR_DRIVER_FORWARD_PIN, LOW);
-  digitalWrite(MOTOR_DRIVER_REVERSE_PIN, LOW);
+  digitalWrite(MOTOR_1_DRIVER_FORWARD_PIN, LOW);
+  digitalWrite(MOTOR_1_DRIVER_REVERSE_PIN, LOW);
 }
 
 /**
  * Run the door motor until the door is determined to be opened.
  * Times out after DOOR_MAX_WAIT ms.
+ *
+ * TODO: Handle both doors.
  */
 void openDoor() {
   if (isOpening) {
@@ -99,6 +108,8 @@ void openDoor() {
 /**
  * Run the door motor until the door is determined to be closed.
  * Times out after DOOR_MAX_WAIT ms.
+ *
+ * TODO: Handle both doors.
  */
 void closeDoor() {
   if (isClosing) {

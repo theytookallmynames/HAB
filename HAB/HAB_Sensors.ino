@@ -1,5 +1,3 @@
-#include <OneWire.h>
-#include <DallasTemperature.h>
 #include <Wire.h>
 #include <math.h>
 #include "HAB.h"
@@ -8,10 +6,6 @@
 
 namespace HAB {
 namespace Sensors {
-
-// TODO: remove next two lines, digital sensors don't work
-OneWire oneWire(ONE_WIRE_BUS_PIN);
-DallasTemperature oneWireSensors(&oneWire);
 
 bool initPressureSensors();
 bool initTempSensors();
@@ -26,9 +20,6 @@ bool init() {
 }
 
 bool initTempSensors() {
-  // TODO: remove next line, digital sensors don't work
-  // oneWireSensors.begin();
-
   pinMode(TEMPERATURE_ONBOARD_PIN, INPUT);
   Logging::logSystemData("Temperature sensors initialized");
   return true;
@@ -99,18 +90,6 @@ PressureData getPressureData() {
   data.bar = rawPressureToBar(data.raw);
 
   return data;
-}
-
-/**
- * TODO: remove this. We couldn't get the digital sensors to work at all.
- */
-void getExternalTemperature() {
-  Serial.println("sensors connected: ");
-  Serial.println(oneWireSensors.getDeviceCount());
-
-  oneWireSensors.requestTemperatures();
-  Serial.print("got temperature: ");
-  Serial.println(oneWireSensors.getTempCByIndex(0));
 }
 
 // Some constants for the analog temperature conversion.
