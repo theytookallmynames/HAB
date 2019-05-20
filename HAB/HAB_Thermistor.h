@@ -9,10 +9,10 @@ struct TemperatureData {
   
 class Thermistor {
   private:
-  int m_address;
+  int m_pin;
 
   public:
-    Thermistor(int address);
+    Thermistor(int pin);
     TemperatureData getTemperature();
 };
 
