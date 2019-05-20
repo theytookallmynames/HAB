@@ -8,21 +8,14 @@ namespace HAB {
 namespace Sensors {
 
 bool initPressureSensors();
-bool initTempSensors();
 
 bool init() {
   pinMode(SENSOR_STATUS_LED_PIN, OUTPUT);
-  bool success = initTempSensors() && initPressureSensors();
+  bool success = initPressureSensors();
   if (success) {
     digitalWrite(SENSOR_STATUS_LED_PIN, HIGH);
   }
   return success;
-}
-
-bool initTempSensors() {
-  pinMode(TEMPERATURE_ONBOARD_PIN, INPUT);
-  Logging::logSystemData("Temperature sensors initialized");
-  return true;
 }
 
 /**
@@ -91,45 +84,5 @@ PressureData getPressureData() {
 
   return data;
 }
-
-// Some constants for the analog temperature conversion.
-const float thermistorNominal = 10000.0;
-const float temperatureNominal = 25.0;
-const float bCoefficient = 3950.0;
-const float pullupResistor = 10000.0;
-
-/**
- * Get a reading from the analog onboard temperature sensor.
- * TODO: we're probably only going to be using analog since we couldn't get
- * the digital sensors working.
- *
- * See https://learn.adafruit.com/thermistor/using-a-thermistor for more info.
- */
-TemperatureData getOnboardTemperature() {
-  TemperatureData data;
-  float rawAverageVoltage = 0.0;
-
-  for (uint8_t i = 0; i < 5; i++) {
-    rawAverageVoltage += analogRead(TEMPERATURE_ONBOARD_PIN);
-    delay(10);
-  }
-
-  rawAverageVoltage /= 5.0;
-  data.raw = rawAverageVoltage;
-
-  float rawResistance = pullupResistor / (1023 / rawAverageVoltage - 1);
-
-  float steinhart = rawResistance / thermistorNominal;
-  steinhart = log(steinhart) / bCoefficient;
-  steinhart += 1.0 / (temperatureNominal + 273.15);
-  steinhart = (1.0 / steinhart) - 273.15;
-
-  data.tempC = steinhart;
-  data.tempF = (data.tempC * 1.8) + 32.0;
-
-  return data;
-}
-
 } // namespace Sensors
 } // namespace HAB
-

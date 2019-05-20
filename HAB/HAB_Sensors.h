@@ -25,16 +25,8 @@ struct PressureData {
   float bar;
 };
 
-struct TemperatureData {
-  float raw;
-  float tempC;
-  float tempF;
-};
-
 bool init();
 PressureData getPressureData();
-TemperatureData getOnboardTemperature();
-void getExternalTemperature();
 
 } // namespace Sensors
 } // namespace HAB
