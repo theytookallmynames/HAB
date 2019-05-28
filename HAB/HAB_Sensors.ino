@@ -2,16 +2,18 @@
 #include <math.h>
 #include "HAB.h"
 #include "HAB_Sensors.h"
+#include "HAB_Thermistor.h"
 #include "HAB_Logging.h"
 
 namespace HAB {
 namespace Sensors {
 
 bool initPressureSensors();
+bool initThermistors();
 
 bool init() {
   pinMode(SENSOR_STATUS_LED_PIN, OUTPUT);
-  bool success = initPressureSensors();
+  bool success = initPressureSensors() && initThermistors();
   if (success) {
     digitalWrite(SENSOR_STATUS_LED_PIN, HIGH);
   }
@@ -44,6 +46,54 @@ bool initPressureSensors() {
   return true;
 }
 
+bool initThermistors() {
+
+  TemperatureData onboardTemperature = onboardThermistor.getTemperature();
+  TemperatureData outdoorTopTemperature = outdoorTopThermistor.getTemperature();
+  TemperatureData outdoorBottomTemperature = outdoorBottomThermistor.getTemperature();
+  
+
+  if (onboardTemperature.tempC <= 0.0) {
+    Logging::logSystemData(
+      "Onboard temperature sensor initialization failed: got temperature lower than 0" + 
+      String(onboardTemperature.tempC) + 
+      "C"
+    );
+     return false; 
+  }
+    if (outdoorTopTemperature.tempC <= 0.0) {
+    Logging::logSystemData(
+      "Outdoor top temperature sensor initialization failed: got temperature lower than 0" + 
+      String(outdoorTopTemperature.tempC) + 
+      "C");
+      
+     return false; 
+  }
+  if (outdoorBottomTemperature.tempC <= 0.0) {
+    Logging::logSystemData(
+      "Outdoor bottom temperature sensor initialization failed: got temperature lower than 0" + 
+      String(outdoorBottomTemperature.tempC) + 
+      "C"
+    );
+     return false; 
+  }
+    Logging::logSystemData(
+      "Onboard temperature sensor initialized. Initial temperature: " + 
+      String(onboardTemperature.tempC) + 
+      "C"
+    );
+    Logging::logSystemData(
+      "Outdoor top temperature sensor initialized. Initial temperature: " + 
+      String(outdoorTopTemperature.tempC) + 
+      "C"
+    );
+    Logging::logSystemData(
+      "Outdoor bottom temperature sensor initialized. Initial temperature: " + 
+      String(outdoorBottomTemperature.tempC) + 
+      "C"
+    );
+    return true;
+}
 /**
  * Convert the raw reading from the pressure sensor to a usable pressure in units of bars.
  * See page 2 of the Honeywell I2C Communication PDF for details on the data protocol,

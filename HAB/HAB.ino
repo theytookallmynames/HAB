@@ -2,13 +2,10 @@
 #include "HAB_GPS.h"
 #include "HAB_Logging.h"
 #include "HAB_Sensors.h"
-#include "HAB_Door.h"
 #include "HAB_Thermistor.h"
+#include "HAB_Door.h"
 using namespace HAB;
 
-Thermistor indoorThermistor = Thermistor(TEMPERATURE_ONBOARD_PIN);
-Thermistor outdoorTopThermistor = Thermistor(TEMPERATURE_OUTSIDE_TOP_PIN);
-Thermistor outdoorBottomThermistor = Thermistor(TEMPERATURE_OUTSIDE_BOTTOM_PIN);
 
 void setup() {
   Serial.begin(9600);
@@ -18,41 +15,41 @@ void setup() {
   while(!Serial);
 #endif
 
-  Logging::logSystemData("System startup");
+ Logging::logSystemData("System startup");
 
-  if (!GPS::init() || !Logging::init()|| !Sensors::init()) {
-    Logging::logSystemData("A subsystem failed to initialize properly. Aborting.");
-    return;
-  }
+ if (!GPS::init() || !Logging::init()|| !Sensors::init()) {
+   Logging::logSystemData("A subsystem failed to initialize properly. Aborting.");
+   return;
+ }
 
-  Logging::logSystemData("All subsystems initialized, starting main loop.");
+ Logging::logSystemData("All subsystems initialized, starting main loop.");
 }
 
 // TODO: actual logic
 void loop() {
-  Door::openDoor();
-  Door::closeDoor();
-  Door::getDoorStatus();
-  GPS::getCurrentUtcTime();
-  Logging::logMissionData(GPS::getRawGPSData());
+ Door::openDoor();
+ Door::closeDoor();
+ Door::getDoorStatus();
+ GPS::getCurrentUtcTime();
+ Logging::logMissionData(GPS::getRawGPSData());
 
-  Sensors::PressureData pressure = Sensors::getPressureData();
-  Logging::logMissionData(
-    "$HAB_PRESSURE," +
-    String(pressure.raw) + "," +
-    String(pressure.bar)
-  );
+ Sensors::PressureData pressure = Sensors::getPressureData();
+ Logging::logMissionData(
+   "$HAB_PRESSURE," +
+   String(pressure.raw) + "," +
+   String(pressure.bar)
+ );
 
 // Log Temperature
-  TemperatureData indoorTemperature = indoorThermistor.getTemperature();
+  Sensors::TemperatureData onboardTemperature = Sensors::onboardThermistor.getTemperature();
   Logging::logMissionData(
-    "$HAB_TEMPERATURE_INDOOR," +
-    String(indoorTemperature.raw) + "," +
-    String(indoorTemperature.tempC) + "," +
-    String(indoorTemperature.tempF)
+    "$HAB_TEMPERATURE_ONBOARD," +
+    String(onboardTemperature.raw) + "," +
+    String(onboardTemperature.tempC) + "," +
+    String(onboardTemperature.tempF)
   );
 
-  TemperatureData outdoorTopTemperature = outdoorTopThermistor.getTemperature();
+  Sensors::TemperatureData outdoorTopTemperature = Sensors::outdoorTopThermistor.getTemperature();
   Logging::logMissionData(
     "$HAB_TEMPERATURE_OUTDOOR_TOP," +
     String(outdoorTopTemperature.raw) + "," +
@@ -60,19 +57,17 @@ void loop() {
     String(outdoorTopTemperature.tempF)
   );
 
-  TemperatureData outdoorBottomTemperature = outdoorBottomThermistor.getTemperature();
+  Sensors::TemperatureData outdoorBottomTemperature = Sensors::outdoorBottomThermistor.getTemperature();
   Logging::logMissionData(
     "$HAB_TEMPERATURE_OUTDOOR_BOTTOM," +
     String(outdoorBottomTemperature.raw) + "," +
     String(outdoorBottomTemperature.tempC) + "," +
     String(outdoorBottomTemperature.tempF)
   );
-  
 
-  if (GPS::process()) {
-    Logging::logSystemData(GPS::getRawGPSData());
-    Logging::logSystemData(String(GPS::getCurrentAltitude()));
-  }
-
-  delay(1000);
+ if (GPS::process()) {
+   Logging::logSystemData(GPS::getRawGPSData());
+   Logging::logSystemData(String(GPS::getCurrentAltitude()));
+ }
+   delay(1000);
 }

@@ -1,5 +1,7 @@
 #include <math.h>
 #include "HAB_Thermistor.h"
+namespace HAB {
+namespace Sensors {
 
 // Some constants for the analog temperature conversion.
 const float thermistorNominal = 10000.0;
@@ -33,5 +35,14 @@ TemperatureData Thermistor::getTemperature() {
   data.tempC = steinhart;
   data.tempF = (data.tempC * 1.8) + 32.0;
 
+#ifdef HAB_DEVELOPMENT
+  Serial.println("PIN = " + String(m_pin));  
+  Serial.println("RAW = " + String(data.raw));
+  Serial.println("TEMP = " + String(data.tempC) + " C"); 
+  Serial.println("TEMP = " + String(data.tempF) + " F");
+  Serial.print("\n");
+#endif
   return data;
+}
+}
 }
