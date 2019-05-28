@@ -2,27 +2,22 @@
 #include <math.h>
 #include "HAB.h"
 #include "HAB_Sensors.h"
+#include "HAB_Thermistor.h"
 #include "HAB_Logging.h"
 
 namespace HAB {
 namespace Sensors {
 
 bool initPressureSensors();
-bool initTempSensors();
+bool initThermistors();
 
 bool init() {
   pinMode(SENSOR_STATUS_LED_PIN, OUTPUT);
-  bool success = initTempSensors() && initPressureSensors();
+  bool success = initPressureSensors() && initThermistors();
   if (success) {
     digitalWrite(SENSOR_STATUS_LED_PIN, HIGH);
   }
   return success;
-}
-
-bool initTempSensors() {
-  pinMode(TEMPERATURE_ONBOARD_PIN, INPUT);
-  Logging::logSystemData("Temperature sensors initialized");
-  return true;
 }
 
 /**
@@ -51,6 +46,54 @@ bool initPressureSensors() {
   return true;
 }
 
+bool initThermistors() {
+
+  TemperatureData onboardTemperature = onboardThermistor.getTemperature();
+  TemperatureData outdoorTopTemperature = outdoorTopThermistor.getTemperature();
+  TemperatureData outdoorBottomTemperature = outdoorBottomThermistor.getTemperature();
+  
+
+  if (onboardTemperature.tempC <= 0.0) {
+    Logging::logSystemData(
+      "Onboard temperature sensor initialization failed: got temperature lower than 0" + 
+      String(onboardTemperature.tempC) + 
+      "C"
+    );
+     return false; 
+  }
+    if (outdoorTopTemperature.tempC <= 0.0) {
+    Logging::logSystemData(
+      "Outdoor top temperature sensor initialization failed: got temperature lower than 0" + 
+      String(outdoorTopTemperature.tempC) + 
+      "C");
+      
+     return false; 
+  }
+  if (outdoorBottomTemperature.tempC <= 0.0) {
+    Logging::logSystemData(
+      "Outdoor bottom temperature sensor initialization failed: got temperature lower than 0" + 
+      String(outdoorBottomTemperature.tempC) + 
+      "C"
+    );
+     return false; 
+  }
+    Logging::logSystemData(
+      "Onboard temperature sensor initialized. Initial temperature: " + 
+      String(onboardTemperature.tempC) + 
+      "C"
+    );
+    Logging::logSystemData(
+      "Outdoor top temperature sensor initialized. Initial temperature: " + 
+      String(outdoorTopTemperature.tempC) + 
+      "C"
+    );
+    Logging::logSystemData(
+      "Outdoor bottom temperature sensor initialized. Initial temperature: " + 
+      String(outdoorBottomTemperature.tempC) + 
+      "C"
+    );
+    return true;
+}
 /**
  * Convert the raw reading from the pressure sensor to a usable pressure in units of bars.
  * See page 2 of the Honeywell I2C Communication PDF for details on the data protocol,
@@ -91,45 +134,5 @@ PressureData getPressureData() {
 
   return data;
 }
-
-// Some constants for the analog temperature conversion.
-const float thermistorNominal = 10000.0;
-const float temperatureNominal = 25.0;
-const float bCoefficient = 3950.0;
-const float pullupResistor = 10000.0;
-
-/**
- * Get a reading from the analog onboard temperature sensor.
- * TODO: we're probably only going to be using analog since we couldn't get
- * the digital sensors working.
- *
- * See https://learn.adafruit.com/thermistor/using-a-thermistor for more info.
- */
-TemperatureData getOnboardTemperature() {
-  TemperatureData data;
-  float rawAverageVoltage = 0.0;
-
-  for (uint8_t i = 0; i < 5; i++) {
-    rawAverageVoltage += analogRead(TEMPERATURE_ONBOARD_PIN);
-    delay(10);
-  }
-
-  rawAverageVoltage /= 5.0;
-  data.raw = rawAverageVoltage;
-
-  float rawResistance = pullupResistor / (1023 / rawAverageVoltage - 1);
-
-  float steinhart = rawResistance / thermistorNominal;
-  steinhart = log(steinhart) / bCoefficient;
-  steinhart += 1.0 / (temperatureNominal + 273.15);
-  steinhart = (1.0 / steinhart) - 273.15;
-
-  data.tempC = steinhart;
-  data.tempF = (data.tempC * 1.8) + 32.0;
-
-  return data;
-}
-
 } // namespace Sensors
 } // namespace HAB
-
