@@ -17,7 +17,7 @@ void setup() {
 
  Logging::logSystemData("System startup");
 
- if (!GPS::init() || !Logging::init()|| !Sensors::init()) {
+ if (!GPS::init() || !Logging::init() || !Sensors::init()) {
    Logging::logSystemData("A subsystem failed to initialize properly. Aborting.");
    return;
  }
@@ -27,43 +27,23 @@ void setup() {
 
 // TODO: actual logic
 void loop() {
- Door::openDoor();
- Door::closeDoor();
- Door::getDoorStatus();
- GPS::getCurrentUtcTime();
- Logging::logMissionData(GPS::getRawGPSData());
-
- Sensors::PressureData pressure = Sensors::getPressureData();
- Logging::logMissionData(
-   "$HAB_PRESSURE," +
-   String(pressure.raw) + "," +
-   String(pressure.bar)
- );
-
-// Log Temperature
+  Door::DoorStatus door1Status = Door::getDoorStatus1();
+  Door::DoorStatus door2Status = Door::getDoorStatus2();
+  GPS::GPSTimeData gpsTime = GPS::getCurrentUtcTime();
+  const char* rawGpsData = GPS::getRawGPSData();
+  long gpsAltitude = GPS::getCurrentAltitude();
   Sensors::TemperatureData onboardTemperature = Sensors::onboardThermistor.getTemperature();
-  Logging::logMissionData(
-    "$HAB_TEMPERATURE_ONBOARD," +
-    String(onboardTemperature.raw) + "," +
-    String(onboardTemperature.tempC) + "," +
-    String(onboardTemperature.tempF)
-  );
-
   Sensors::TemperatureData outdoorTopTemperature = Sensors::outdoorTopThermistor.getTemperature();
-  Logging::logMissionData(
-    "$HAB_TEMPERATURE_OUTDOOR_TOP," +
-    String(outdoorTopTemperature.raw) + "," +
-    String(outdoorTopTemperature.tempC) + "," +
-    String(outdoorTopTemperature.tempF)
-  );
-
   Sensors::TemperatureData outdoorBottomTemperature = Sensors::outdoorBottomThermistor.getTemperature();
-  Logging::logMissionData(
-    "$HAB_TEMPERATURE_OUTDOOR_BOTTOM," +
-    String(outdoorBottomTemperature.raw) + "," +
-    String(outdoorBottomTemperature.tempC) + "," +
-    String(outdoorBottomTemperature.tempF)
-  );
+  Sensors::PressureData pressure = Sensors::getPressureData();
+  // Sensors::PressureData pressure;
+  // pressure.raw = 2;
+  // pressure.bar = 4;
+
+  Logging::MissionData data = Logging::MissionData(rawGpsData, gpsAltitude, onboardTemperature, outdoorTopTemperature, outdoorBottomTemperature, pressure, door1Status, door1Status);
+  Logging::logMissionData(data.toString());
+  adjustDoorIfNeeded(gpsAltitude);
+  
 
  if (GPS::process()) {
    Logging::logSystemData(GPS::getRawGPSData());
