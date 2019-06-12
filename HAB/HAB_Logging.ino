@@ -44,17 +44,35 @@ bool init() {
     Serial.println("File not Created. Aborting...");
     return false;
   }
+  // Files are created, set the title of the CSV and write on systemFile
+  missionFile.println(MissionData::getTitles());
+  systemFile.println("System File initializing...");
+
+  // Read files to check if data was recorded.
+  char firstMissionChar = missionFile.read();
+  char firstSystemChar = missionFile.read();
+  // Serial.println("Char is");
+  // Serial.println(firstSystemChar);
+  // Serial.println(firstMissionChar);
+
+  if (firstMissionChar == -1) {
+      Serial.println("Can't read from missionFile. Aborting...");
+      return false;
+  } else if (firstSystemChar == -1) {
+      Serial.println("Can't read from system file. Aborting...");
+      return false;
+  }
+
+  missionFile.close();
+  systemFile.close();
   
-  // Files are created, set the title of the CSV
-    missionFile.println(MissionData::getTitles());
-    missionFile.close();
-
-  didInit = true;
-  digitalWrite(SD_STATUS_LED_PIN, HIGH);
-
   logSystemData("Log files created.");
   logSystemData("Logging mission data to " + missionLogFileName);
   logSystemData("Logging system data to " + systemLogFileName);
+  logSystemData("Logging module is ready for deployment...");
+
+  didInit = true;
+  digitalWrite(SD_STATUS_LED_PIN, HIGH);
 
   return true;
 }
@@ -133,24 +151,51 @@ String createTimestamp() {
   );
 }
 
-// missionData
-  MissionData::MissionData(const char* rawGpsData, 
-              long gpsAltitude, 
-              Sensors::TemperatureData onboardTemperature,
-              Sensors::TemperatureData outdoorTopTemperature,
-              Sensors::TemperatureData outdoorBottomTemperature,
-              Sensors::PressureData pressure,
-              Door::DoorStatus door1Status, 
-              Door::DoorStatus door2Status) {
-                data.rawGpsData = rawGpsData;
-                data.gpsAltitude = gpsAltitude;
-                data.onboardTemperature = onboardTemperature;
-                data.outdoorTopTemperature = outdoorTopTemperature;
-                data.outdoorBottomTemperature = outdoorBottomTemperature;
-                data.pressure = pressure;
-                data.door1Status = door1Status;
-                data.door2Status = door2Status;
-              }
+// missionData - remove below if using separate methods for setting the data values is confirmed
+
+  // MissionData::MissionData(const char* rawGpsData, 
+  //             long gpsAltitude, 
+  //             Sensors::TemperatureData onboardTemperature,
+  //             Sensors::TemperatureData outdoorTopTemperature,
+  //             Sensors::TemperatureData outdoorBottomTemperature,
+  //             Sensors::PressureData pressure,
+  //             Door::DoorStatus door1Status, 
+  //             Door::DoorStatus door2Status) {
+  //               data.rawGpsData = rawGpsData;
+  //               data.gpsAltitude = gpsAltitude;
+  //               data.onboardTemperature = onboardTemperature;
+  //               data.outdoorTopTemperature = outdoorTopTemperature;
+  //               data.outdoorBottomTemperature = outdoorBottomTemperature;
+  //               data.pressure = pressure;
+  //               data.door1Status = door1Status;
+  //               data.door2Status = door2Status;
+  //             }
+
+  void MissionData::setRawGpsData(const char* rawGpsData) {
+      data.rawGpsData = rawGpsData;
+  }
+  void MissionData::setGpsAltitude (long gpsAltitude) { 
+      data.gpsAltitude = gpsAltitude;
+  }
+  void MissionData::setOnboardTemperature(Sensors::TemperatureData onboardTemperature) {
+      data.onboardTemperature = onboardTemperature;
+  }
+  void MissionData::setOutdoorTopTemperature(Sensors::TemperatureData outdoorTopTemperature) {
+      data.outdoorTopTemperature = outdoorTopTemperature;
+  }
+  void MissionData::setOutdoorBottomTemperature(Sensors::TemperatureData outdoorBottomTemperature) {
+      data.outdoorBottomTemperature = outdoorBottomTemperature;
+  }
+  void MissionData::setPressureData(Sensors::PressureData pressure){
+     data.pressure = pressure;
+  }
+  void MissionData::setDoor1Status(Door::DoorStatus door1Status){
+     data.door1Status = door1Status;
+  }
+  void MissionData::setDoor2Status(Door::DoorStatus door2Status){
+     data.door2Status = door2Status;
+  }
+
 
   String MissionData::getTitles() {
       String titles = "date,"
@@ -176,6 +221,7 @@ String createTimestamp() {
       String gpsData = String(data.rawGpsData);
       //csv creates a column for each GPS number because they are comma separated, this replaces all commas with -
       gpsData.replace(',','-');
+      
       // Creating comma separated sentence for logging into csv file.
       String missionData = createTimestamp() + "," + 
                        gpsData + "," +

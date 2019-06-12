@@ -25,7 +25,6 @@ void setup() {
  Logging::logSystemData("All subsystems initialized, starting main loop.");
 }
 
-// TODO: actual logic
 void loop() {
   Door::DoorStatus door1Status = Door::getDoorStatus1();
   Door::DoorStatus door2Status = Door::getDoorStatus2();
