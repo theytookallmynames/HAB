@@ -11,15 +11,6 @@ namespace Logging {
 class MissionData {
 public:
 
-// remove below if using separate methods for setting the data values is confirmed
-  // MissionData(const char* rawGpsData, 
-  //             long gpsAltitude, 
-  //             Sensors::TemperatureData onboardTemperature,
-  //             Sensors::TemperatureData outdoorTopTemperature,
-  //             Sensors::TemperatureData outdoorBottomTemperature,
-  //             Sensors::PressureData pressure,
-  //             Door::DoorStatus door1Status, 
-  //             Door::DoorStatus door2Status);
   static String getTitles();
   String toString();
   void setRawGpsData(const char* rawGpsData);
@@ -30,16 +21,6 @@ public:
   void setPressureData(Sensors::PressureData pressure);
   void setDoor1Status(Door::DoorStatus door1status);
   void setDoor2Status(Door::DoorStatus door2status);
-
-//TODO: need to set get for existing sets
-
-// rawGpsData getCurrentUtcTime()
-// gpsAltitude getCurrentAltitude();
-// TemperatureData Thermistor::getTemperature();
-// PressureData getPressureData();
-// DoorStatus getDoorStatus1();
-// DoorStatus getDoorStatus2();
-// PressureData getPressureData();
 
   // missionData
   typedef struct {

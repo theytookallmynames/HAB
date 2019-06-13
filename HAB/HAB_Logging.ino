@@ -44,13 +44,14 @@ bool init() {
     Serial.println("File not Created. Aborting...");
     return false;
   }
+  
   // Files are created, set the title of the CSV and write on systemFile
   missionFile.println(MissionData::getTitles());
   systemFile.println("System File initializing...");
 
   // Read files to check if data was recorded.
   char firstMissionChar = missionFile.read();
-  char firstSystemChar = missionFile.read();
+  char firstSystemChar = systemFile.read();
   // Serial.println("Char is");
   // Serial.println(firstSystemChar);
   // Serial.println(firstMissionChar);
@@ -151,26 +152,6 @@ String createTimestamp() {
   );
 }
 
-// missionData - remove below if using separate methods for setting the data values is confirmed
-
-  // MissionData::MissionData(const char* rawGpsData, 
-  //             long gpsAltitude, 
-  //             Sensors::TemperatureData onboardTemperature,
-  //             Sensors::TemperatureData outdoorTopTemperature,
-  //             Sensors::TemperatureData outdoorBottomTemperature,
-  //             Sensors::PressureData pressure,
-  //             Door::DoorStatus door1Status, 
-  //             Door::DoorStatus door2Status) {
-  //               data.rawGpsData = rawGpsData;
-  //               data.gpsAltitude = gpsAltitude;
-  //               data.onboardTemperature = onboardTemperature;
-  //               data.outdoorTopTemperature = outdoorTopTemperature;
-  //               data.outdoorBottomTemperature = outdoorBottomTemperature;
-  //               data.pressure = pressure;
-  //               data.door1Status = door1Status;
-  //               data.door2Status = door2Status;
-  //             }
-
   void MissionData::setRawGpsData(const char* rawGpsData) {
       data.rawGpsData = rawGpsData;
   }
@@ -219,6 +200,7 @@ String createTimestamp() {
 
   String MissionData::toString() {
       String gpsData = String(data.rawGpsData);
+      
       //csv creates a column for each GPS number because they are comma separated, this replaces all commas with -
       gpsData.replace(',','-');
       
