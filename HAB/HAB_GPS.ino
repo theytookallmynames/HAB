@@ -40,12 +40,6 @@ bool init() {
         );
         break;
       }
-
-      // Flash the GPS status LED to indicate that we're waiting for GPS acquisition
-//      digitalWrite(GPS_STATUS_LED_PIN, HIGH);
-//      delay(400);
-//      digitalWrite(GPS_STATUS_LED_PIN, LOW);
-//      delay(400);
     }
 
     if (millis() - gpsTimeout > GPS_MAX_WAIT) {
