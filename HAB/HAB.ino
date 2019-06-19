@@ -62,8 +62,6 @@ void loop() {
 //Doors opening and closing at 60000 ft
 
 void adjustDoorIfNeeded(long altitude) {
-  Door::DoorStatus door1Status = Door::getDoorStatus1();
-  Door::DoorStatus door2Status = Door::getDoorStatus2();
   if (altitude >= MOTOR_OPEN_TRIGGER_ALTITUDE) {
       Door::openDoor();
       
