@@ -18,6 +18,8 @@ public:
   void setOnboardTemperature(Sensors::TemperatureData onboardTemperature);
   void setOutdoorTopTemperature(Sensors::TemperatureData OutdoorTopTemperature);
   void setOutdoorBottomTemperature(Sensors::TemperatureData OutdoorBottomTemperature);
+  void setOutdoorTopTemperature(Sensors::TemperatureData outdoorTopTemperature);
+  void setOutdoorBottomTemperature(Sensors::TemperatureData outdoorBottomTemperature);
   void setPressureData(Sensors::PressureData pressure);
   void setDoor1Status(Door::DoorStatus door1status);
   void setDoor2Status(Door::DoorStatus door2status);

@@ -41,8 +41,9 @@ namespace HAB {
  * Other constants
  */
 
-// Altitude in km at which the payload door should open/close
-#define MOTOR_TRIGGER_ALTITUDE 46
+// Altitude in millimiters at which the payload door should open/close
+#define MOTOR_OPEN_TRIGGER_ALTITUDE 18288000
+#define MOTOR_CLOSE_TRIGGER_ALTITUDE 16764000
 
 } // namespace HAB
 

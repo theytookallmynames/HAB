@@ -52,9 +52,6 @@ bool init() {
   // Read files to check if data was recorded.
   char firstMissionChar = missionFile.read();
   char firstSystemChar = systemFile.read();
-  // Serial.println("Char is");
-  // Serial.println(firstSystemChar);
-  // Serial.println(firstMissionChar);
 
   if (firstMissionChar == -1) {
       Serial.println("Can't read from missionFile. Aborting...");
@@ -106,7 +103,6 @@ void logSystemData(String data) {
   if (didInit) {
     File file = SD.open(systemLogFileName, FILE_WRITE);
     if (file) {
-      Serial.println("File exists");
       if (timestamp.length() != 0) {
         file.print(timestamp); file.print(" ");
       }
@@ -122,8 +118,6 @@ void logSystemData(String data) {
 /**
  * Log mission data such as GPS and sensors readings.
  */
-
- //TODO: rename logMissionData so they are not same
  
 void logMissionData(String data) {
   logSystemData("Logging missionData.");
@@ -150,6 +144,7 @@ String createTimestamp() {
     String(time.minute) + "-" +
     String(time.seconds)
   );
+   logSystemData("Could not open file " + missionLogFileName);
 }
 
   void MissionData::setRawGpsData(const char* rawGpsData) {

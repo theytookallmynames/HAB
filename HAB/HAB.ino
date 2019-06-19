@@ -59,18 +59,16 @@ void loop() {
    delay(1000);
 }
 
-//Doors opening and closing at 60000 ft TODO: altitude is in meters, set threshold and pass it here
+//Doors opening and closing at 60000 ft
 
-const long altitudeOpenThreshold = 60000;
-const long altitudeCloseThreshold = 55000;
 void adjustDoorIfNeeded(long altitude) {
   Door::DoorStatus door1Status = Door::getDoorStatus1();
   Door::DoorStatus door2Status = Door::getDoorStatus2();
-  if (altitude >= altitudeOpenThreshold && (door1Status == Door::DoorStatus::DOOR_CLOSED || door2Status == Door::DoorStatus::DOOR_CLOSED)){
+  if (altitude >= MOTOR_OPEN_TRIGGER_ALTITUDE) {
       Door::openDoor();
+      
       //TODO: System log the door opening time and altitude
-      //TODO: Don't need to check door status
-  } else if (altitude <= altitudeCloseThreshold && (door1Status == Door::DoorStatus::DOOR_OPEN || door2Status == Door::DoorStatus::DOOR_OPEN)) {
+  } else if (altitude <= MOTOR_CLOSE_TRIGGER_ALTITUDE) {
       Door::closeDoor();
       //TODO: System log the door closing time stamp and altitude
   }
