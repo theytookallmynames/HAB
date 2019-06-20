@@ -16,8 +16,6 @@ public:
   void setRawGpsData(const char* rawGpsData);
   void setGpsAltitude (long gpsAltitude);
   void setOnboardTemperature(Sensors::TemperatureData onboardTemperature);
-  void setOutdoorTopTemperature(Sensors::TemperatureData OutdoorTopTemperature);
-  void setOutdoorBottomTemperature(Sensors::TemperatureData OutdoorBottomTemperature);
   void setOutdoorTopTemperature(Sensors::TemperatureData outdoorTopTemperature);
   void setOutdoorBottomTemperature(Sensors::TemperatureData outdoorBottomTemperature);
   void setPressureData(Sensors::PressureData pressure);
