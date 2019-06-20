@@ -18,13 +18,13 @@ namespace HAB {
 #define PRESSURE_SENSOR_PIN 2
 
 // Thermistor pins
-#define TEMPERATURE_ONBOARD_PIN A7
-#define TEMPERATURE_OUTDOOR_TOP_PIN 14
-#define TEMPERATURE_OUTDOOR_BOTTOM_PIN 16
+#define TEMPERATURE_ONBOARD_PIN 6
+#define TEMPERATURE_OUTDOOR_TOP_PIN 5
+#define TEMPERATURE_OUTDOOR_BOTTOM_PIN 11
 
-#define SENSOR_STATUS_LED_PIN 22
-#define GPS_STATUS_LED_PIN 23
-#define SD_STATUS_LED_PIN 15
+#define SENSOR_STATUS_LED_PIN 18
+#define GPS_STATUS_LED_PIN 19
+#define SD_STATUS_LED_PIN 24
 
 #define MOTOR_DRIVER_ENABLE_PIN 11
 #define MOTOR_1_DRIVER_FORWARD_PIN 10
@@ -41,8 +41,9 @@ namespace HAB {
  * Other constants
  */
 
-// Altitude in km at which the payload door should open/close
-#define MOTOR_TRIGGER_ALTITUDE 46
+// Altitude in millimiters at which the payload door should open/close
+#define MOTOR_OPEN_TRIGGER_ALTITUDE 18288000
+#define MOTOR_CLOSE_TRIGGER_ALTITUDE 16764000
 
 } // namespace HAB
 

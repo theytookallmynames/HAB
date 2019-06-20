@@ -12,30 +12,32 @@ bool initPressureSensors();
 bool initThermistors();
 
 bool init() {
-  pinMode(SENSOR_STATUS_LED_PIN, OUTPUT);
-  bool success = initPressureSensors() && initThermistors();
-  if (success) {
-    digitalWrite(SENSOR_STATUS_LED_PIN, HIGH);
-  }
-  return success;
+ pinMode(SENSOR_STATUS_LED_PIN, OUTPUT);
+ Logging::logSystemData("Initializing sensors now...");
+ bool success = initPressureSensors() && initThermistors();
+ if (success) {
+   digitalWrite(SENSOR_STATUS_LED_PIN, HIGH);
+ }
+ return success;
 }
 
 /**
  * Initialize the pressure sensors.
  */
 bool initPressureSensors() {
+  Logging::logSystemData("Initializing Pressure Sensors...");
   Wire.begin();
   delay(500);
 
   PressureData initialPressure = getPressureData();
-  if (initialPressure.bar <= 0.0) {
-    Logging::logSystemData(
-      "Pressure sensor initialization failed: got pressure lower than 0 (" +
-      String(initialPressure.bar) +
-      " bar)"
-    );
-    return false;
-  }
+ if (initialPressure.bar <= 0.0) {
+   Logging::logSystemData(
+     "Pressure sensor initialization failed: got pressure lower than 0 (" +
+     String(initialPressure.bar) +
+     " bar)"
+   );
+   return false;
+ }
 
   Logging::logSystemData(
     "Pressure sensors initialized. Initial pressure: " +

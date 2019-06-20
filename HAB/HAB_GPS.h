@@ -8,7 +8,7 @@ namespace GPS {
 #define GPSSerial Serial1
 
 // Max time to wait for initial GPS acquisition in milliseconds
-#define GPS_MAX_WAIT 20000
+#define GPS_MAX_WAIT 60000
 
 // Instruction to tell GPS to only output GPRMC and GPGGA data, from Adafruit_GPS.h
 #define PMTK_SET_NMEA_OUTPUT_RMCGGA "$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28"
