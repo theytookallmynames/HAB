@@ -16,6 +16,7 @@ void setup() {
 #endif
 
  Logging::logSystemData("System startup");
+ Door::init();
 
  if (!GPS::init() || !Logging::init() || !Sensors::init()) {
    Logging::logSystemData("A subsystem failed to initialize properly. Aborting.");
