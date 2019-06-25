@@ -6,12 +6,12 @@ namespace Door {
 
 // Max time to run the door motor in milliseconds before timing out.
 // I'm not sure if this is necessary.
-#define DOOR_MAX_WAIT 10000
+#define DOOR_MAX_WAIT 100000
 
 // A number in the range of 0-255. 150 seems to be reasonable but needs to be tested.
-#define DOOR_SPEED 150
+#define DOOR_SPEED 255
 
-enum DoorStatus { DOOR_OPEN, DOOR_CLOSED};
+enum DoorStatus {DOOR_OPEN, DOOR_CLOSED, DOOR_INTERMEDIATE};
 
 void init();
 DoorStatus getDoorStatus1();
