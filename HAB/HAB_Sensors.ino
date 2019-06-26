@@ -4,6 +4,7 @@
 #include "HAB_Sensors.h"
 #include "HAB_Thermistor.h"
 #include "HAB_Logging.h"
+#include "HAB_LED.h"
 
 namespace HAB {
 namespace Sensors {
@@ -12,12 +13,8 @@ bool initPressureSensors();
 bool initThermistors();
 
 bool init() {
- pinMode(SENSOR_STATUS_LED_PIN, OUTPUT);
  Logging::logSystemData("Initializing sensors now...");
  bool success = initPressureSensors() && initThermistors();
- if (success) {
-   digitalWrite(SENSOR_STATUS_LED_PIN, HIGH);
- }
  return success;
 }
 
@@ -26,6 +23,7 @@ bool init() {
  */
 bool initPressureSensors() {
   Logging::logSystemData("Initializing Pressure Sensors...");
+  LED::statusLED(PRESSURE_SENSOR_STATUS_LED, LED::pending);
   Wire.begin();
   delay(500);
 
@@ -36,6 +34,7 @@ bool initPressureSensors() {
      String(initialPressure.bar) +
      " bar)"
    );
+   LED::statusLED(PRESSURE_SENSOR_STATUS_LED, LED::failure);
    return false;
  }
 
@@ -44,11 +43,17 @@ bool initPressureSensors() {
     String(initialPressure.bar) +
     " bar"
   );
+  LED::statusLED(PRESSURE_SENSOR_STATUS_LED, LED::success);
 
   return true;
 }
 
 bool initThermistors() {
+
+    LED::statusLED(ONBOARD_TEMPERATURE_STATUS_LED, LED::pending);
+    LED::statusLED(OUTDOOR_TOP_TEMPERATURE_STATUS_LED, LED::pending);
+    LED::statusLED(OUTDOOR_BOTTOM_TEMPERATURE_STATUS_LED, LED::pending);
+
 
   TemperatureData onboardTemperature = onboardThermistor.getTemperature();
   TemperatureData outdoorTopTemperature = outdoorTopThermistor.getTemperature();
@@ -61,7 +66,9 @@ bool initThermistors() {
       String(onboardTemperature.tempC) + 
       "C"
     );
-     return false; 
+    
+    LED::statusLED(ONBOARD_TEMPERATURE_STATUS_LED, LED::failure);
+    return false; 
   }
     if (outdoorTopTemperature.tempC <= 0.0) {
     Logging::logSystemData(
@@ -69,6 +76,7 @@ bool initThermistors() {
       String(outdoorTopTemperature.tempC) + 
       "C");
       
+     LED::statusLED(OUTDOOR_TOP_TEMPERATURE_STATUS_LED, LED::failure);
      return false; 
   }
   if (outdoorBottomTemperature.tempC <= 0.0) {
@@ -77,23 +85,30 @@ bool initThermistors() {
       String(outdoorBottomTemperature.tempC) + 
       "C"
     );
-     return false; 
+    LED::statusLED(OUTDOOR_BOTTOM_TEMPERATURE_STATUS_LED, LED::failure);
+    return false; 
   }
     Logging::logSystemData(
       "Onboard temperature sensor initialized. Initial temperature: " + 
       String(onboardTemperature.tempC) + 
       "C"
     );
+    LED::statusLED(ONBOARD_TEMPERATURE_STATUS_LED, LED::success);
+    
     Logging::logSystemData(
       "Outdoor top temperature sensor initialized. Initial temperature: " + 
       String(outdoorTopTemperature.tempC) + 
       "C"
     );
+    LED::statusLED(OUTDOOR_TOP_TEMPERATURE_STATUS_LED, LED::success);
+    
     Logging::logSystemData(
       "Outdoor bottom temperature sensor initialized. Initial temperature: " + 
       String(outdoorBottomTemperature.tempC) + 
       "C"
     );
+    LED::statusLED(OUTDOOR_BOTTOM_TEMPERATURE_STATUS_LED, LED::success);
+    
     return true;
 }
 /**

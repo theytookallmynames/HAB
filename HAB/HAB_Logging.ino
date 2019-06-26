@@ -2,6 +2,7 @@
 #include "HAB.h"
 #include "HAB_GPS.h"
 #include "HAB_Logging.h"
+#include "HAB_LED.h"
 
 namespace HAB {
 namespace Logging {
@@ -18,13 +19,15 @@ String systemLogFileName;
  */
 bool init() {
   pinMode(SD_CARD_PIN, OUTPUT);
-  pinMode(SD_STATUS_LED_PIN, OUTPUT);
+  LED::statusLED(SD_STATUS_LED, LED::pending);
 
   if (!SD.begin(SD_CARD_PIN)) {
     logSystemData("SD card initialization failed. Could not connect to SD card.");
+    LED::statusLED(SD_STATUS_LED, LED::failure);
     return false;
   }
-
+  
+  LED::statusLED(SD_STATUS_LED, LED::success);
   logSystemData("SD card ready");
 
   if (!GPS::gpsReady()) {
@@ -70,7 +73,6 @@ bool init() {
   logSystemData("Logging module is ready for deployment...");
 
   didInit = true;
-  digitalWrite(SD_STATUS_LED_PIN, HIGH);
 
   return true;
 }
