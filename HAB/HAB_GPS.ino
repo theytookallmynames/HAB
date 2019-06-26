@@ -1,6 +1,7 @@
 #include <MicroNMEA.h>
 #include "HAB_GPS.h"
 #include "HAB_Logging.h"
+#include "HAB_LED.h"
 
 namespace HAB {
 namespace GPS {
@@ -10,12 +11,12 @@ MicroNMEA nmea(gpsBuffer, sizeof(gpsBuffer));
 bool didInit = false;
 
 bool init() {
-  pinMode(GPS_STATUS_LED_PIN, OUTPUT);
   GPSSerial.begin(4800);
   while (!GPSSerial);
 
   Logging::logSystemData("GPS serial ready");
   Logging::logSystemData("Waiting for GPS acquisition");
+  LED::statusLED(GPS_STATUS_LED, LED::pending);
 
   GPSSerial.println(PMTK_SET_NMEA_UPDATE_1HZ);
   GPSSerial.println(PMTK_SET_NMEA_OUTPUT_RMCGGA);
@@ -48,12 +49,13 @@ bool init() {
         String(GPS_MAX_WAIT) +
         " ms. Aborting."
       );
+      LED::statusLED(GPS_STATUS_LED, LED::failure);
       return false;
     }
   }
 
   didInit = true;
-  digitalWrite(GPS_STATUS_LED_PIN, HIGH);
+  LED::statusLED(GPS_STATUS_LED, LED::success);
   return true;
 }
 
