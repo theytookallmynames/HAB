@@ -8,9 +8,6 @@ namespace Door {
 // I'm not sure if this is necessary.
 #define DOOR_MAX_WAIT 100000
 
-// A number in the range of 0-255. 150 seems to be reasonable but needs to be tested.
-#define DOOR_SPEED 255
-
 enum DoorStatus {DOOR_OPEN, DOOR_CLOSED, DOOR_INTERMEDIATE};
 
 void init();
