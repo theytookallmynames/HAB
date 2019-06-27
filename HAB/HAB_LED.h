@@ -21,7 +21,7 @@ Adafruit_NeoPixel strip(LED_COUNT, LED_PIN);
 enum Colors {
   success = 65280, 
   failure = 16711680, 
-  pending = 16050280
+  pending = 16776960
 };
 
 bool init();
