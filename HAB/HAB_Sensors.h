@@ -5,9 +5,9 @@
 namespace HAB {
 namespace Sensors {
 
-  Thermistor onboardThermistor = Thermistor(TEMPERATURE_ONBOARD_PIN);
-  Thermistor outdoorTopThermistor = Thermistor(TEMPERATURE_OUTDOOR_TOP_PIN);
-  Thermistor outdoorBottomThermistor = Thermistor(TEMPERATURE_OUTDOOR_BOTTOM_PIN);
+Thermistor onboardThermistor = Thermistor(TEMPERATURE_ONBOARD_PIN);
+Thermistor outdoorTopThermistor = Thermistor(TEMPERATURE_OUTDOOR_TOP_PIN);
+Thermistor outdoorBottomThermistor = Thermistor(TEMPERATURE_OUTDOOR_BOTTOM_PIN);
 
 /**
  * The I2C address for the pressure sensor. See Honeywell HSC PDF page 13 figure 4 (output type).

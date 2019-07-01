@@ -19,18 +19,16 @@ Adafruit_NeoPixel strip(LED_COUNT, LED_PIN);
 #define SYSTEM_STATUS_LED 7
 
 /**
- * The values for the Colors enum were determined by printing the uint32_t value used to 
- * set the color for the lights to the serial monitor.  We then put the int value 
+ * The values for the Colors enum were determined by printing the uint32_t value used to
+ * set the color for the lights to the serial monitor.  We then put the int value
  * printed out in the enum.
- * 
+ *
  * For example, success is green so the value was uint32_t success = strip.Color(0, 255, 0).
  * When success is printed to the serial monitor, the value 65280 is given so that is the enum value.
- * 
  */
- 
 enum Colors {
-  success = 65280, 
-  failure = 16711680, 
+  success = 65280,
+  failure = 16711680,
   pending = 16776960
 };
 

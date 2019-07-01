@@ -28,15 +28,15 @@ bool initPressureSensors() {
   delay(500);
 
   PressureData initialPressure = getPressureData();
- if (initialPressure.bar <= 0.0) {
-   Logging::logSystemData(
-     "Pressure sensor initialization failed: got pressure lower than 0 (" +
-     String(initialPressure.bar) +
-     " bar)"
-   );
-   LED::statusLED(PRESSURE_SENSOR_STATUS_LED, LED::failure);
-   return false;
- }
+  if (initialPressure.bar <= 0.0) {
+    Logging::logSystemData(
+      "Pressure sensor initialization failed: got pressure lower than 0 (" +
+      String(initialPressure.bar) +
+      " bar)"
+    );
+    LED::statusLED(PRESSURE_SENSOR_STATUS_LED, LED::failure);
+    return false;
+  }
 
   Logging::logSystemData(
     "Pressure sensors initialized. Initial pressure: " +
@@ -48,68 +48,71 @@ bool initPressureSensors() {
   return true;
 }
 
+/**
+ * Temperature initialization consists of
+ */
 bool initThermistors() {
-
-    LED::statusLED(ONBOARD_TEMPERATURE_STATUS_LED, LED::pending);
-    LED::statusLED(OUTDOOR_TOP_TEMPERATURE_STATUS_LED, LED::pending);
-    LED::statusLED(OUTDOOR_BOTTOM_TEMPERATURE_STATUS_LED, LED::pending);
-
+  LED::statusLED(ONBOARD_TEMPERATURE_STATUS_LED, LED::pending);
+  LED::statusLED(OUTDOOR_TOP_TEMPERATURE_STATUS_LED, LED::pending);
+  LED::statusLED(OUTDOOR_BOTTOM_TEMPERATURE_STATUS_LED, LED::pending);
 
   TemperatureData onboardTemperature = onboardThermistor.getTemperature();
   TemperatureData outdoorTopTemperature = outdoorTopThermistor.getTemperature();
   TemperatureData outdoorBottomTemperature = outdoorBottomThermistor.getTemperature();
-  
 
   if (onboardTemperature.tempC <= 0.0) {
     Logging::logSystemData(
-      "Onboard temperature sensor initialization failed: got temperature lower than 0" + 
-      String(onboardTemperature.tempC) + 
-      "C"
+      "Onboard temperature sensor initialization failed: got temperature lower than 0 (" +
+      String(onboardTemperature.tempC) +
+      " C)"
     );
-    
+
     LED::statusLED(ONBOARD_TEMPERATURE_STATUS_LED, LED::failure);
-    return false; 
-  }
-    if (outdoorTopTemperature.tempC <= 0.0) {
+    return false;
+  } else {
     Logging::logSystemData(
-      "Outdoor top temperature sensor initialization failed: got temperature lower than 0" + 
-      String(outdoorTopTemperature.tempC) + 
-      "C");
-      
-     LED::statusLED(OUTDOOR_TOP_TEMPERATURE_STATUS_LED, LED::failure);
-     return false; 
-  }
-  if (outdoorBottomTemperature.tempC <= 0.0) {
-    Logging::logSystemData(
-      "Outdoor bottom temperature sensor initialization failed: got temperature lower than 0" + 
-      String(outdoorBottomTemperature.tempC) + 
-      "C"
-    );
-    LED::statusLED(OUTDOOR_BOTTOM_TEMPERATURE_STATUS_LED, LED::failure);
-    return false; 
-  }
-    Logging::logSystemData(
-      "Onboard temperature sensor initialized. Initial temperature: " + 
-      String(onboardTemperature.tempC) + 
+      "Onboard temperature sensor initialized. Initial temperature: " +
+      String(onboardTemperature.tempC) +
       "C"
     );
     LED::statusLED(ONBOARD_TEMPERATURE_STATUS_LED, LED::success);
-    
+  }
+
+  if (outdoorTopTemperature.tempC <= 0.0) {
     Logging::logSystemData(
-      "Outdoor top temperature sensor initialized. Initial temperature: " + 
-      String(outdoorTopTemperature.tempC) + 
+      "Outdoor top temperature sensor initialization failed: got temperature lower than 0 (" +
+      String(outdoorTopTemperature.tempC) +
+      " C)");
+
+     LED::statusLED(OUTDOOR_TOP_TEMPERATURE_STATUS_LED, LED::failure);
+     return false;
+  } else {
+    Logging::logSystemData(
+      "Outdoor top temperature sensor initialized. Initial temperature: " +
+      String(outdoorTopTemperature.tempC) +
       "C"
     );
     LED::statusLED(OUTDOOR_TOP_TEMPERATURE_STATUS_LED, LED::success);
-    
+  }
+
+  if (outdoorBottomTemperature.tempC <= 0.0) {
     Logging::logSystemData(
-      "Outdoor bottom temperature sensor initialized. Initial temperature: " + 
-      String(outdoorBottomTemperature.tempC) + 
+      "Outdoor bottom temperature sensor initialization failed: got temperature lower than 0 (" +
+      String(outdoorBottomTemperature.tempC) +
+      " C)"
+    );
+    LED::statusLED(OUTDOOR_BOTTOM_TEMPERATURE_STATUS_LED, LED::failure);
+    return false;
+  } else {
+    Logging::logSystemData(
+      "Outdoor bottom temperature sensor initialized. Initial temperature: " +
+      String(outdoorBottomTemperature.tempC) +
       "C"
     );
     LED::statusLED(OUTDOOR_BOTTOM_TEMPERATURE_STATUS_LED, LED::success);
-    
-    return true;
+  }
+
+  return true;
 }
 /**
  * Convert the raw reading from the pressure sensor to a usable pressure in units of bars.
@@ -151,5 +154,6 @@ PressureData getPressureData() {
 
   return data;
 }
+
 } // namespace Sensors
 } // namespace HAB

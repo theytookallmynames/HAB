@@ -10,7 +10,6 @@ namespace Logging {
 
 class MissionData {
 public:
-
   static String getTitles();
   String toString();
   void setRawGpsData(const char* rawGpsData);
@@ -26,13 +25,14 @@ public:
   typedef struct {
     const char* rawGpsData;
     long gpsAltitude;
-    Sensors::TemperatureData onboardTemperature; 
+    Sensors::TemperatureData onboardTemperature;
     Sensors::TemperatureData outdoorTopTemperature;
     Sensors::TemperatureData outdoorBottomTemperature;
     Sensors::PressureData pressure;
     Door::DoorStatus door1Status;
     Door::DoorStatus door2Status;
   } Data;
+
  private:
   Data data;
 };

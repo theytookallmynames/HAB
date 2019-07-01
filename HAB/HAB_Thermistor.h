@@ -8,8 +8,8 @@ struct TemperatureData {
   float raw;
   float tempC;
   float tempF;
-  };
-  
+};
+
 class Thermistor {
   private:
   int m_pin;
@@ -21,4 +21,5 @@ class Thermistor {
 
 }
 }
+
 #endif // HAB_SENSORS_H

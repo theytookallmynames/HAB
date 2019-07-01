@@ -7,7 +7,7 @@ namespace LED {
 bool init() {
   Logging::logSystemData("Initializing LED");
   strip.setBrightness(20);
-  
+
   strip.begin();
   strip.show();
 
@@ -31,8 +31,6 @@ void statusLED(int pin, Colors color) {
   strip.setPixelColor(pin, color);
   strip.show();
 }
-
-
 
 } //namespace LED
 } //namespace HAB

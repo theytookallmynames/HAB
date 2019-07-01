@@ -7,7 +7,6 @@ namespace Door {
 bool isOpening = false;
 bool isClosing = false;
 
-
 void init() {
   // The door switch pins are in pullup mode, and are tied to ground when the switches close.
   pinMode(DOOR_1_SWITCH_FRONT_PIN, INPUT_PULLUP); //INPUT_PULLUP sets the switch to high.
@@ -15,8 +14,7 @@ void init() {
   pinMode(DOOR_2_SWITCH_FRONT_PIN, INPUT_PULLUP);
   pinMode(DOOR_2_SWITCH_REAR_PIN, INPUT_PULLUP);
 
-  
-  //TODO: Remove all references to the MOTOR_DRIVER_ENABLE_PIN since the MOTOR_DRIVER_ENABLE_PIN is connected directly to the 5V line. 
+  // These pins go to the motor driver IC to control the direction of each motor.
   pinMode(MOTOR_1_DRIVER_FORWARD_PIN, OUTPUT);
   pinMode(MOTOR_1_DRIVER_REVERSE_PIN, OUTPUT);
   pinMode(MOTOR_2_DRIVER_FORWARD_PIN, OUTPUT);
@@ -33,21 +31,18 @@ void init() {
  *
  * The door is considered closed if the front limit switches are in the LOW state and the
  * rear limit switches are in the HIGH state meaning that the front limit switches are closed.
- * 
+ *
  * The door is considered intermediate if BOTH the front and rear limit switches are in the HIGH
  * state, meaning that none of the switches are closed.
- * 
+ *
  * The door is considered open if the front limit switches are in the HIGH state and the
  * rear limit switches are in the LOW state meaning that the rear limit switches are closed.
- *
  */
- 
 DoorStatus getDoorStatus1() {
   int frontDoorStatus = digitalRead(DOOR_1_SWITCH_FRONT_PIN);
   int rearDoorStatus = digitalRead(DOOR_1_SWITCH_REAR_PIN);
 
-  if(frontDoorStatus == HIGH && rearDoorStatus == HIGH)
-  {
+  if(frontDoorStatus == HIGH && rearDoorStatus == HIGH) {
     return DOOR_INTERMEDIATE;
   }
 
@@ -56,24 +51,21 @@ DoorStatus getDoorStatus1() {
   }
 
   return DOOR_OPEN;
-
-  
 }
 
 DoorStatus getDoorStatus2() {
   int frontDoorStatus = digitalRead(DOOR_2_SWITCH_FRONT_PIN);
   int rearDoorStatus = digitalRead(DOOR_2_SWITCH_REAR_PIN);
 
-  if(frontDoorStatus == HIGH && rearDoorStatus == HIGH)
-  {
+  if(frontDoorStatus == HIGH && rearDoorStatus == HIGH) {
     return DOOR_INTERMEDIATE;
   }
 
   if (frontDoorStatus == LOW) {
     return DOOR_CLOSED;
   }
-  
-   return DOOR_OPEN;
+
+  return DOOR_OPEN;
 }
 
 
@@ -82,16 +74,15 @@ void stopMotor() {
   digitalWrite(MOTOR_1_DRIVER_FORWARD_PIN, LOW);
   digitalWrite(MOTOR_1_DRIVER_REVERSE_PIN, LOW);
   digitalWrite(MOTOR_2_DRIVER_FORWARD_PIN, LOW);
-  digitalWrite(MOTOR_2_DRIVER_REVERSE_PIN, LOW); 
+  digitalWrite(MOTOR_2_DRIVER_REVERSE_PIN, LOW);
 }
 
 /**
  * Run the door motor until the door is determined to be opened.
  * Times out after DOOR_MAX_WAIT ms.
- *
+ * The doors must open one at a time since we can't provide enough current to drive both at the same time.
  */
- 
-void openDoor() { //The doors open one at a time
+void openDoor() {
   bool isOpening = true;
   uint32_t startTime;
 
@@ -99,13 +90,13 @@ void openDoor() { //The doors open one at a time
     return;
   }
 
-  //Open door 1
+  // Open door 1
   Logging::logSystemData("Opening Door 1");
   startTime = millis();
-  while (getDoorStatus1() != DOOR_OPEN  && isOpening) {
+  while (getDoorStatus1() != DOOR_OPEN && isOpening) {
     digitalWrite(MOTOR_1_DRIVER_FORWARD_PIN, HIGH);
     digitalWrite(MOTOR_1_DRIVER_REVERSE_PIN, LOW);
-    
+
     if (millis() - startTime > DOOR_MAX_WAIT) {
       Logging::logSystemData(
         "openDoor() for door 1 timed out after " +
@@ -117,16 +108,15 @@ void openDoor() { //The doors open one at a time
   }
   Logging::logSystemData("Door 1 finished opening");
   stopMotor();
-  
 
-  //Open door 2
-  isOpening = true;
+  // Open door 2
   Logging::logSystemData("Opening Door 2");
+  isOpening = true;
   startTime = millis();
   while (getDoorStatus2() != DOOR_OPEN && isOpening){
     digitalWrite(MOTOR_2_DRIVER_FORWARD_PIN, HIGH);
     digitalWrite(MOTOR_2_DRIVER_REVERSE_PIN, LOW);
-    
+
     if (millis() - startTime > DOOR_MAX_WAIT) {
       Logging::logSystemData(
         "openDoor() for door 2 timed out after " +
@@ -134,7 +124,6 @@ void openDoor() { //The doors open one at a time
         " ms. Aborting."
       );
 
-      
       isOpening = false;
     }
   }
@@ -145,60 +134,56 @@ void openDoor() { //The doors open one at a time
 /**
  * Run the door motor until the door is determined to be closed.
  * Times out after DOOR_MAX_WAIT ms.
- *
+ * The doors must close one at a time since we can't provide enough current to drive both at the same time.
  */
-void closeDoor() { //Doors close one at a time
+void closeDoor() {
   bool isClosing = true;
   uint32_t startTime;
-  
+
   if (getDoorStatus1() == DOOR_CLOSED && getDoorStatus2() == DOOR_CLOSED) {
     return;
   }
 
-  //Close Door 1
+  // Close Door 1
   Logging::logSystemData("Closing Door 1");
   startTime = millis();
   while (getDoorStatus1() != DOOR_CLOSED && isClosing) {
     digitalWrite(MOTOR_1_DRIVER_FORWARD_PIN, LOW);
     digitalWrite(MOTOR_1_DRIVER_REVERSE_PIN, HIGH);
 
-    //Time Out for Door 1 in event of the switch failing.
-    
+    // Time Out for Door 1 in event of the switch failing.
     if (millis() - startTime > DOOR_MAX_WAIT) {
       Logging::logSystemData(
         "closeDoor() for door 1 timed out after " +
         String(DOOR_MAX_WAIT) +
         " ms. Aborting."
-       );
-       isClosing = false;
+      );
+      isClosing = false;
     }
-
   }
   Logging::logSystemData("Door 1 finished closing");
   stopMotor();
 
-   //Close Door 2
-   isClosing = true;
-   Logging::logSystemData("Closing Door 2");
-   startTime = millis();
-   while (getDoorStatus2() != DOOR_CLOSED && isClosing) {
+  // Close Door 2
+  Logging::logSystemData("Closing Door 2");
+  isClosing = true;
+  startTime = millis();
+  while (getDoorStatus2() != DOOR_CLOSED && isClosing) {
     digitalWrite(MOTOR_2_DRIVER_FORWARD_PIN, LOW);
     digitalWrite(MOTOR_2_DRIVER_REVERSE_PIN, HIGH);
 
-    //Time Out for door 2
-
+    // Time Out for door 2
     if (millis() - startTime > DOOR_MAX_WAIT) {
       Logging::logSystemData(
         "closeDoor() for door 2 timed out after " +
         String(DOOR_MAX_WAIT) +
         " ms. Aborting."
-       );
-       isClosing = false;
-     }
+      );
+      isClosing = false;
     }
-    Logging::logSystemData("Door 2 finished closing");
-    stopMotor();
-  
+  }
+  Logging::logSystemData("Door 2 finished closing");
+  stopMotor();
 }
 
 } // namespace Door

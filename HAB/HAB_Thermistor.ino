@@ -11,7 +11,7 @@ const float pullupResistor = 10000.0;
 
 // Constructor for the thermistor that accepts physical pin addresses
 Thermistor::Thermistor(int pin) {
-    m_pin = pin;
+  m_pin = pin;
 }
 
 TemperatureData Thermistor::getTemperature() {
@@ -36,13 +36,14 @@ TemperatureData Thermistor::getTemperature() {
   data.tempF = (data.tempC * 1.8) + 32.0;
 
 #ifdef HAB_DEVELOPMENT
-  Serial.println("PIN = " + String(m_pin));  
+  Serial.println("PIN = " + String(m_pin));
   Serial.println("RAW = " + String(data.raw));
-  Serial.println("TEMP = " + String(data.tempC) + " C"); 
+  Serial.println("TEMP = " + String(data.tempC) + " C");
   Serial.println("TEMP = " + String(data.tempF) + " F");
   Serial.print("\n");
 #endif
   return data;
 }
+
 }
 }
