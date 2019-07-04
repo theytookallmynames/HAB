@@ -12,8 +12,7 @@ class MissionData {
 public:
   static String getTitles();
   String toString();
-  void setRawGpsData(const char* rawGpsData);
-  void setGpsAltitude (long gpsAltitude);
+  void setGpsData(GPS::GPSData gpsData);
   void setOnboardTemperature(Sensors::TemperatureData onboardTemperature);
   void setOutdoorTopTemperature(Sensors::TemperatureData outdoorTopTemperature);
   void setOutdoorBottomTemperature(Sensors::TemperatureData outdoorBottomTemperature);
@@ -23,8 +22,7 @@ public:
 
   // missionData
   typedef struct {
-    const char* rawGpsData;
-    long gpsAltitude;
+    GPS::GPSData gpsData;
     Sensors::TemperatureData onboardTemperature;
     Sensors::TemperatureData outdoorTopTemperature;
     Sensors::TemperatureData outdoorBottomTemperature;

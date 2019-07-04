@@ -7,8 +7,6 @@
 namespace HAB {
 namespace Logging {
 
-String createTimestamp();
-
 bool didInit = false;
 String missionLogFileName;
 String systemLogFileName;
@@ -30,7 +28,7 @@ bool init() {
   LED::statusLED(SD_STATUS_LED, LED::success);
   logSystemData("SD card ready");
 
-  if (!GPS::gpsReady()) {
+  if (!GPS::isGpsReady()) {
     logSystemData("Logging::init() was run before GPS::init(), and therefore data files cannot be created. Aborting.");
     return false;
   }
@@ -83,53 +81,53 @@ bool init() {
  * Log system messages such as debug messages, errors, etc.
  * Prints the message and a newline.
  */
-void logSystemData(String data) {
-  String timestamp = "";
+void logSystemData(String data) { String timestamp = "";
 
-  if (GPS::gpsReady()) {
-    timestamp = createTimestamp();
-  }
+ if (GPS::isGpsReady()) {
+    timestamp = GPS::_data.time.description();
+ }
 
-  if (Serial) {
-    if (timestamp.length() != 0) {
-      Serial.print(timestamp); Serial.print(" ");
-    }
+ if (Serial) {
+   // Serial.print("timestamp length: ");
+   // Serial.println(timestamp.length(), DEC);
 
-    Serial.println(data);
-  }
+   if (timestamp.length() != 0) {
+     Serial.print(timestamp); Serial.print(" ");
+   }
 
-  /**
-   * logSystemData may be called before Logging::init() is finished,
-   * so we need to check if the SD card has been initialized yet before
-   * writing to it.
-   */
-  if (didInit) {
-    File file = SD.open(systemLogFileName, FILE_WRITE);
-    if (file) {
-      if (timestamp.length() != 0) {
-        file.print(timestamp); file.print(" ");
-      }
+   Serial.println(data);
+ }
 
-      file.println(data);
-      file.close();
-    } else {
-      Serial.println("Could not open file " + systemLogFileName);
-    }
-  }
+ // logSystemData may be called before Logging::init() is finished,
+ // so we need to check if the SD card has been initialized yet before
+ // writing to it.
+ if (didInit) {
+   File file = SD.open(systemLogFileName, FILE_WRITE);
+   if (file) {
+     if (timestamp.length() != 0) {
+       file.print(timestamp); file.print(" ");
+     }
+
+     file.println(data);
+     file.close();
+   }
+   else {
+     Serial.println("Could not open file " + systemLogFileName);
+   }
+ }
 }
 
 /**
  * Log mission data such as GPS and sensors readings.
  */
 void logMissionData(String data) {
-  logSystemData("Logging missionData.");
-  File file = SD.open(missionLogFileName, FILE_WRITE);
-  if (file) {
-    file.println(data);
-    file.close();
-  } else {
-    Serial.println("Could not open file " + missionLogFileName);
-  }
+ File file = SD.open(missionLogFileName, FILE_WRITE);
+ if (file) {
+   file.println(data);
+   file.close();
+ } else {
+   logSystemData("Could not open file " + missionLogFileName);
+ }
 }
 
 /**
@@ -148,12 +146,10 @@ String createTimestamp() {
   );
 }
 
-void MissionData::setRawGpsData(const char* rawGpsData) {
-  data.rawGpsData = rawGpsData;
-}
-void MissionData::setGpsAltitude (long gpsAltitude) {
-  data.gpsAltitude = gpsAltitude;
-}
+  void MissionData::setGpsData(GPS::GPSData gpsData) {
+      data.gpsData = gpsData;
+  }
+
 void MissionData::setOnboardTemperature(Sensors::TemperatureData onboardTemperature) {
   data.onboardTemperature = onboardTemperature;
 }
@@ -173,10 +169,15 @@ void MissionData::setDoor2Status(Door::DoorStatus door2Status){
   data.door2Status = door2Status;
 }
 
+uint8_t numberOfSatellites;
 String MissionData::getTitles() {
-  String titles = "date,"
-                  "rawGpsData,"
-                  "gpsAltitude,"
+      String titles = "TimeStamp(UTC),"
+                  "NMEA sentence,"
+                  "GpsAltitude (meter),"
+                  "Speed (kmh),"
+                  "latitude,"
+                  "longitude,"
+                  "number of satelites,"
                   "pressureRaw,"
                   "pressureBar,"
                   "onboardTempRaw,"
@@ -194,15 +195,18 @@ String MissionData::getTitles() {
 }
 
 String MissionData::toString() {
-  String gpsData = String(data.rawGpsData);
-
+  String nmeaSentence = String(data.gpsData.nmeaSentence);
   // CSV creates a column for each GPS value because they are comma separated, this replaces all commas with -
-  gpsData.replace(',','-');
-
+  nmeaSentence.replace(',','-');
+  
   // Creating comma separated sentence for logging into csv file.
-  String missionData = createTimestamp() + "," +
-                    gpsData + "," +
-                    String(data.gpsAltitude) + "," +
+      String missionData = data.gpsData.time.description() + "," + 
+                    nmeaSentence + "," +
+                    String(data.gpsData.altitude) + "," +
+                    String(data.gpsData.speed) + "," +
+                    String(data.gpsData.latitude) + "," +                       
+                    String(data.gpsData.longitude) + "," +
+                    String(data.gpsData.numberOfSatellites) + "," +
                     String(data.pressure.raw) + "," +
                     String(data.pressure.bar) + "," +
                     String(data.onboardTemperature.raw) + "," +
