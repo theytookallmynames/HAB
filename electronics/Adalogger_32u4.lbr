@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE eagle SYSTEM "eagle.dtd">
+<eagle version="9.3.1">
+<drawing>
+<settings>
+<setting alwaysvectorfont="no"/>
+<setting verticaltext="up"/>
+</settings>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<layers>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
+<layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
+<layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
+<layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
+<layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
+<layer number="33" name="tFinish" color="6" fill="3" visible="no" active="yes"/>
+<layer number="34" name="bFinish" color="6" fill="6" visible="no" active="yes"/>
+<layer number="35" name="tGlue" color="7" fill="4" visible="no" active="yes"/>
+<layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
+<layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
+<layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
+<layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
+<layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
+<layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
+<layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="88" name="SimResults" color="9" fill="1" visible="yes" active="yes"/>
+<layer number="89" name="SimProbes" color="9" fill="1" visible="yes" active="yes"/>
+<layer number="90" name="Modules" color="54" fill="1" visible="yes" active="yes"/>
+<layer number="91" name="Nets" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="92" name="Busses" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="93" name="Pins" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="94" name="Symbols" color="4" fill="0" visible="yes" active="yes"/>
+<layer number="95" name="Names" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="96" name="Values" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="97" name="Info" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes"/>
+<layer number="100" name="Connectors" color="7" fill="1" visible="yes" active="yes"/>
+</layers>
+<library>
+<packages>
+<package name="BOARD">
+<rectangle x1="0" y1="-50.8" x2="22.86" y2="0" layer="21"/>
+<pad name="RST" x="1.27" y="-7.62" drill="0.6" shape="square"/>
+<pad name="3V" x="1.27" y="-10.16" drill="0.6" shape="square"/>
+<pad name="AREF" x="1.27" y="-12.7" drill="0.6" shape="square"/>
+<pad name="GND" x="1.27" y="-15.24" drill="0.6" shape="square"/>
+<pad name="14/A0" x="1.27" y="-17.78" drill="0.6" shape="square"/>
+<pad name="15/A1" x="1.27" y="-20.32" drill="0.6" shape="square"/>
+<pad name="16/A2" x="1.27" y="-22.86" drill="0.6" shape="square"/>
+<pad name="17/A3" x="1.27" y="-25.4" drill="0.6" shape="square"/>
+<pad name="18/A4" x="1.27" y="-27.94" drill="0.6" shape="square"/>
+<pad name="19/A5" x="1.27" y="-30.48" drill="0.6" shape="square"/>
+<pad name="24/SCK" x="1.27" y="-33.02" drill="0.6" shape="square"/>
+<pad name="23/MOSI" x="1.27" y="-35.56" drill="0.6" shape="square"/>
+<pad name="22/MISO" x="1.27" y="-38.1" drill="0.6" shape="square"/>
+<pad name="0/RX" x="1.27" y="-40.64" drill="0.6" shape="square"/>
+<pad name="1/TX" x="1.27" y="-43.18" drill="0.6" shape="square"/>
+<pad name="GND1" x="1.27" y="-45.72" drill="0.6" shape="square"/>
+<pad name="VBAT" x="21.59" y="-17.78" drill="0.6" shape="square"/>
+<pad name="EN" x="21.59" y="-20.32" drill="0.6" shape="square"/>
+<pad name="5V" x="21.59" y="-22.86" drill="0.6" shape="square"/>
+<pad name="13" x="21.59" y="-25.4" drill="0.6" shape="square"/>
+<pad name="12" x="21.59" y="-27.94" drill="0.6" shape="square"/>
+<pad name="11" x="21.59" y="-30.48" drill="0.6" shape="square"/>
+<pad name="10" x="21.59" y="-33.02" drill="0.6" shape="square"/>
+<pad name="9/A7" x="21.59" y="-35.56" drill="0.6" shape="square"/>
+<pad name="6" x="21.59" y="-38.1" drill="0.6" shape="square"/>
+<pad name="5" x="21.59" y="-40.64" drill="0.6" shape="square"/>
+<pad name="21/SCL" x="21.59" y="-43.18" drill="0.6" shape="square"/>
+<pad name="20/SDA" x="21.59" y="-45.72" drill="0.6" shape="square"/>
+<text x="12.7" y="-34.29" size="1.27" layer="21" rot="R90">Adafruit Adalogger M0</text>
+<text x="11.43" y="-34.29" size="1.524" layer="21" rot="R90">Adafruit Adalogger M0</text>
+<text x="12.7" y="-38.1" size="1.778" layer="25" rot="R90">Adafruit Adalogger M0</text>
+</package>
+<package name="GPS_BREAKOUT">
+<rectangle x1="0" y1="-13.97" x2="20.32" y2="0" layer="21"/>
+<pad name="GND" x="3.81" y="-1.27" drill="0.6" shape="square"/>
+<pad name="VCC" x="6.35" y="-1.27" drill="0.6" shape="square"/>
+<pad name="TXD" x="8.89" y="-1.27" drill="0.6" shape="square"/>
+<pad name="RX" x="11.43" y="-1.27" drill="0.6" shape="square"/>
+<pad name="TX" x="13.97" y="-1.27" drill="0.6" shape="square"/>
+<pad name="RXD" x="16.51" y="-1.27" drill="0.6" shape="square"/>
+<text x="16.51" y="-15.875" size="1.4224" layer="25">GPS</text>
+</package>
+<package name="VMA320">
+<rectangle x1="0" y1="-6.35" x2="15.24" y2="0" layer="21"/>
+<pad name="S" x="5.08" y="-5.08" drill="0.6" shape="square"/>
+<pad name="VCC" x="7.62" y="-5.08" drill="0.6" shape="square"/>
+<pad name="GND" x="10.16" y="-5.08" drill="0.6" shape="square"/>
+<text x="0" y="0.254" size="0.8128" layer="25">&gt;NAME</text>
+<text x="4.826" y="-2.413" size="1.016" layer="25">VMA320</text>
+</package>
+<package name="HSC_PRESSURE">
+<rectangle x1="0" y1="-10.16" x2="10.16" y2="0" layer="21"/>
+<pad name="GND" x="1.27" y="-8.89" drill="0.6" shape="square"/>
+<pad name="VCC" x="3.81" y="-8.89" drill="0.6" shape="square"/>
+<pad name="SDA" x="6.35" y="-8.89" drill="0.6" shape="square"/>
+<pad name="SCL" x="8.89" y="-8.89" drill="0.6" shape="square"/>
+<text x="0" y="0.254" size="0.8128" layer="25">&gt;NAME</text>
+<text x="0.762" y="-2.286" size="0.8128" layer="21">HSC PRESSURE</text>
+<text x="0.762" y="-3.048" size="0.8128" layer="25">HSC PRESSURE</text>
+</package>
+</packages>
+<symbols>
+<symbol name="ADALOGGER_M0">
+<description>the board</description>
+<pin name="RST" x="-5.08" y="-10.16" length="middle"/>
+<pin name="3V" x="-5.08" y="-15.24" length="middle"/>
+<pin name="AREF" x="-5.08" y="-20.32" length="middle"/>
+<pin name="GND" x="-5.08" y="-25.4" length="middle"/>
+<pin name="14/A0" x="-5.08" y="-30.48" length="middle"/>
+<pin name="15/A1" x="-5.08" y="-35.56" length="middle"/>
+<pin name="16/A2" x="-5.08" y="-40.64" length="middle"/>
+<pin name="17/A3" x="-5.08" y="-45.72" length="middle"/>
+<pin name="18/A4" x="-5.08" y="-50.8" length="middle"/>
+<pin name="19/A5" x="-5.08" y="-55.88" length="middle"/>
+<pin name="24/SCK" x="-5.08" y="-60.96" length="middle"/>
+<pin name="23/MOSI" x="-5.08" y="-66.04" length="middle"/>
+<pin name="22/MISO" x="-5.08" y="-71.12" length="middle"/>
+<pin name="0/RX" x="-5.08" y="-76.2" length="middle"/>
+<pin name="1/TX" x="-5.08" y="-81.28" length="middle"/>
+<pin name="GND1" x="-5.08" y="-86.36" length="middle"/>
+<circle x="3.556" y="-3.302" radius="2.54" width="0.254" layer="94"/>
+<circle x="37.338" y="-3.302" radius="2.54" width="0.254" layer="94"/>
+<circle x="3.556" y="-93.218" radius="2.54" width="0.254" layer="94"/>
+<circle x="37.338" y="-93.218" radius="2.54" width="0.254" layer="94"/>
+<rectangle x1="0" y1="-96.52" x2="40.64" y2="0" layer="94"/>
+<pin name="20/SDA" x="45.72" y="-86.36" length="middle" rot="R180"/>
+<pin name="21/SCL" x="45.72" y="-81.28" length="middle" rot="R180"/>
+<pin name="5" x="45.72" y="-76.2" length="middle" rot="R180"/>
+<pin name="6" x="45.72" y="-71.12" length="middle" rot="R180"/>
+<pin name="9" x="45.72" y="-66.04" length="middle" rot="R180"/>
+<pin name="10" x="45.72" y="-60.96" length="middle" rot="R180"/>
+<pin name="11" x="45.72" y="-55.88" length="middle" rot="R180"/>
+<pin name="12" x="45.72" y="-50.8" length="middle" rot="R180"/>
+<pin name="13" x="45.72" y="-45.72" length="middle" rot="R180"/>
+<pin name="VBUS/USB" x="45.72" y="-40.64" length="middle" rot="R180"/>
+<pin name="EN" x="45.72" y="-35.56" length="middle" rot="R180"/>
+<pin name="VBAT" x="45.72" y="-30.48" length="middle" rot="R180"/>
+<text x="22.86" y="-78.74" size="5.08" layer="95" rot="R90">Adalogger M0</text>
+<rectangle x1="12.7" y1="-7.62" x2="27.94" y2="2.54" layer="100"/>
+<rectangle x1="35.56" y1="-25.4" x2="43.18" y2="-10.16" layer="100"/>
+<text x="14.732" y="-9.906" size="1.778" layer="95">USB Micro</text>
+<text x="34.29" y="-21.844" size="1.778" layer="95" rot="R90">Battery</text>
+</symbol>
+<symbol name="MAX31820">
+<pin name="1/GND" x="-7.62" y="-12.7" length="middle" rot="R90"/>
+<pin name="2/DQ" x="0" y="-12.7" length="middle" rot="R90"/>
+<pin name="3/VDD" x="7.62" y="-12.7" length="middle" rot="R90"/>
+<rectangle x1="-12.7" y1="-7.62" x2="12.7" y2="7.62" layer="94"/>
+<text x="-7.62" y="3.302" size="2.1844" layer="95">MAX31820</text>
+</symbol>
+<symbol name="GPS">
+<pin name="1/GND" x="-10.16" y="-10.16" length="middle" rot="R90"/>
+<pin name="2/VCC" x="-5.08" y="-10.16" length="middle" rot="R90"/>
+<pin name="3/TXD" x="0" y="-10.16" length="middle" rot="R90"/>
+<pin name="4/RX" x="5.08" y="-10.16" length="middle" rot="R90"/>
+<pin name="5/TX" x="10.16" y="-10.16" length="middle" rot="R90"/>
+<pin name="6/RXD" x="15.24" y="-10.16" length="middle" rot="R90"/>
+<rectangle x1="-12.7" y1="-5.08" x2="17.78" y2="10.16" layer="94"/>
+<text x="-4.064" y="6.096" size="1.778" layer="95">GM401 GPS</text>
+</symbol>
+<symbol name="VMA320">
+<pin name="S" x="-5.08" y="-10.16" visible="pin" length="middle" rot="R90"/>
+<pin name="VCC" x="0" y="-10.16" visible="pin" length="middle" rot="R90"/>
+<pin name="GND" x="5.08" y="-10.16" visible="pin" length="middle" rot="R90"/>
+<rectangle x1="-7.62" y1="-5.08" x2="7.62" y2="7.62" layer="94"/>
+<text x="-4.572" y="4.064" size="1.778" layer="95">VMA320</text>
+</symbol>
+<symbol name="PRESSURE">
+<pin name="1/GND" x="-7.62" y="-5.08" length="middle" rot="R90"/>
+<pin name="2/VCC" x="-2.54" y="-5.08" length="middle" rot="R90"/>
+<pin name="3/SDA" x="2.54" y="-5.08" length="middle" rot="R90"/>
+<pin name="4/SCL" x="7.62" y="-5.08" length="middle" rot="R90"/>
+<rectangle x1="-12.7" y1="0" x2="12.7" y2="15.24" layer="94"/>
+<text x="-6.604" y="11.43" size="1.778" layer="95">PRESSURE</text>
+</symbol>
+<symbol name="CUI_8_TERMINAL_BLOCK">
+<rectangle x1="0" y1="-13" x2="41" y2="0" layer="94"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="ADALOGGER_M0">
+<gates>
+<gate name="G$1" symbol="ADALOGGER_M0" x="-30.48" y="22.86"/>
+</gates>
+<devices>
+<device name="" package="BOARD">
+<connects>
+<connect gate="G$1" pin="0/RX" pad="0/RX"/>
+<connect gate="G$1" pin="1/TX" pad="1/TX"/>
+<connect gate="G$1" pin="10" pad="10"/>
+<connect gate="G$1" pin="11" pad="11"/>
+<connect gate="G$1" pin="12" pad="12"/>
+<connect gate="G$1" pin="13" pad="13"/>
+<connect gate="G$1" pin="14/A0" pad="14/A0"/>
+<connect gate="G$1" pin="15/A1" pad="15/A1"/>
+<connect gate="G$1" pin="16/A2" pad="16/A2"/>
+<connect gate="G$1" pin="17/A3" pad="17/A3"/>
+<connect gate="G$1" pin="18/A4" pad="18/A4"/>
+<connect gate="G$1" pin="19/A5" pad="19/A5"/>
+<connect gate="G$1" pin="20/SDA" pad="20/SDA"/>
+<connect gate="G$1" pin="21/SCL" pad="21/SCL"/>
+<connect gate="G$1" pin="22/MISO" pad="22/MISO"/>
+<connect gate="G$1" pin="23/MOSI" pad="23/MOSI"/>
+<connect gate="G$1" pin="24/SCK" pad="24/SCK"/>
+<connect gate="G$1" pin="3V" pad="3V"/>
+<connect gate="G$1" pin="5" pad="5"/>
+<connect gate="G$1" pin="6" pad="6"/>
+<connect gate="G$1" pin="9" pad="9/A7"/>
+<connect gate="G$1" pin="AREF" pad="AREF"/>
+<connect gate="G$1" pin="EN" pad="EN"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="GND1" pad="GND1"/>
+<connect gate="G$1" pin="RST" pad="RST"/>
+<connect gate="G$1" pin="VBAT" pad="VBAT"/>
+<connect gate="G$1" pin="VBUS/USB" pad="5V"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="_EXTERNAL_" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="MAX31820">
+<gates>
+<gate name="G$1" symbol="MAX31820" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name="">
+<attribute name="_EXTERNAL_" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="GPS">
+<gates>
+<gate name="G$1" symbol="GPS" x="-2.54" y="-2.54"/>
+</gates>
+<devices>
+<device name="" package="GPS_BREAKOUT">
+<connects>
+<connect gate="G$1" pin="1/GND" pad="GND"/>
+<connect gate="G$1" pin="2/VCC" pad="VCC"/>
+<connect gate="G$1" pin="3/TXD" pad="TXD"/>
+<connect gate="G$1" pin="4/RX" pad="RX"/>
+<connect gate="G$1" pin="5/TX" pad="TX"/>
+<connect gate="G$1" pin="6/RXD" pad="RXD"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="_EXTERNAL_" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="VMA320">
+<gates>
+<gate name="G$1" symbol="VMA320" x="0" y="-2.54"/>
+</gates>
+<devices>
+<device name="" package="VMA320">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="S" pad="S"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="PRESSURE">
+<gates>
+<gate name="G$1" symbol="PRESSURE" x="0" y="-5.08"/>
+</gates>
+<devices>
+<device name="" package="HSC_PRESSURE">
+<connects>
+<connect gate="G$1" pin="1/GND" pad="GND"/>
+<connect gate="G$1" pin="2/VCC" pad="VCC"/>
+<connect gate="G$1" pin="3/SDA" pad="SDA"/>
+<connect gate="G$1" pin="4/SCL" pad="SCL"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="_EXTERNAL_" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+</drawing>
+</eagle>
