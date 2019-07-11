@@ -159,48 +159,52 @@
 <library name="Adalogger_32u4">
 <packages>
 <package name="GPS_BREAKOUT">
-<rectangle x1="0" y1="-13.97" x2="20.32" y2="0" layer="21"/>
-<pad name="GND" x="3.81" y="-1.27" drill="0.6" shape="square"/>
-<pad name="VCC" x="6.35" y="-1.27" drill="0.6" shape="square"/>
-<pad name="TXD" x="8.89" y="-1.27" drill="0.6" shape="square"/>
-<pad name="RX" x="11.43" y="-1.27" drill="0.6" shape="square"/>
-<pad name="TX" x="13.97" y="-1.27" drill="0.6" shape="square"/>
-<pad name="RXD" x="16.51" y="-1.27" drill="0.6" shape="square"/>
-<text x="16.51" y="-15.875" size="1.4224" layer="25">GPS</text>
+<pad name="GND" x="3.81" y="-1.27" drill="0.6" diameter="1.27"/>
+<pad name="VCC" x="6.35" y="-1.27" drill="0.6" diameter="1.27"/>
+<pad name="TXD" x="8.89" y="-1.27" drill="0.6" diameter="1.27"/>
+<pad name="RX" x="11.43" y="-1.27" drill="0.6" diameter="1.27"/>
+<pad name="TX" x="13.97" y="-1.27" drill="0.6" diameter="1.27"/>
+<pad name="RXD" x="16.51" y="-1.27" drill="0.6" diameter="1.27"/>
+<text x="21.59" y="-1.905" size="1.4224" layer="25">GPS</text>
+<wire x1="0" y1="0" x2="0" y2="-13.97" width="0.127" layer="21"/>
+<wire x1="0" y1="-13.97" x2="20.32" y2="-13.97" width="0.127" layer="21"/>
+<wire x1="20.32" y1="-13.97" x2="20.32" y2="0" width="0.127" layer="21"/>
+<wire x1="20.32" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
 </package>
 <package name="BOARD">
-<rectangle x1="0" y1="-50.8" x2="22.86" y2="0" layer="21"/>
-<pad name="RST" x="1.27" y="-7.62" drill="0.6" shape="square"/>
-<pad name="3V" x="1.27" y="-10.16" drill="0.6" shape="square"/>
-<pad name="AREF" x="1.27" y="-12.7" drill="0.6" shape="square"/>
-<pad name="GND" x="1.27" y="-15.24" drill="0.6" shape="square"/>
-<pad name="14/A0" x="1.27" y="-17.78" drill="0.6" shape="square"/>
-<pad name="15/A1" x="1.27" y="-20.32" drill="0.6" shape="square"/>
-<pad name="16/A2" x="1.27" y="-22.86" drill="0.6" shape="square"/>
-<pad name="17/A3" x="1.27" y="-25.4" drill="0.6" shape="square"/>
-<pad name="18/A4" x="1.27" y="-27.94" drill="0.6" shape="square"/>
-<pad name="19/A5" x="1.27" y="-30.48" drill="0.6" shape="square"/>
-<pad name="24/SCK" x="1.27" y="-33.02" drill="0.6" shape="square"/>
-<pad name="23/MOSI" x="1.27" y="-35.56" drill="0.6" shape="square"/>
-<pad name="22/MISO" x="1.27" y="-38.1" drill="0.6" shape="square"/>
-<pad name="0/RX" x="1.27" y="-40.64" drill="0.6" shape="square"/>
-<pad name="1/TX" x="1.27" y="-43.18" drill="0.6" shape="square"/>
-<pad name="GND1" x="1.27" y="-45.72" drill="0.6" shape="square"/>
-<pad name="VBAT" x="21.59" y="-17.78" drill="0.6" shape="square"/>
-<pad name="EN" x="21.59" y="-20.32" drill="0.6" shape="square"/>
-<pad name="5V" x="21.59" y="-22.86" drill="0.6" shape="square"/>
-<pad name="13" x="21.59" y="-25.4" drill="0.6" shape="square"/>
-<pad name="12" x="21.59" y="-27.94" drill="0.6" shape="square"/>
-<pad name="11" x="21.59" y="-30.48" drill="0.6" shape="square"/>
-<pad name="10" x="21.59" y="-33.02" drill="0.6" shape="square"/>
-<pad name="9/A7" x="21.59" y="-35.56" drill="0.6" shape="square"/>
-<pad name="6" x="21.59" y="-38.1" drill="0.6" shape="square"/>
-<pad name="5" x="21.59" y="-40.64" drill="0.6" shape="square"/>
-<pad name="21/SCL" x="21.59" y="-43.18" drill="0.6" shape="square"/>
-<pad name="20/SDA" x="21.59" y="-45.72" drill="0.6" shape="square"/>
-<text x="12.7" y="-34.29" size="1.27" layer="21" rot="R90">Adafruit Adalogger M0</text>
-<text x="11.43" y="-34.29" size="1.524" layer="21" rot="R90">Adafruit Adalogger M0</text>
-<text x="12.7" y="-38.1" size="1.778" layer="25" rot="R90">Adafruit Adalogger M0</text>
+<pad name="RST" x="1.27" y="-7.62" drill="0.6" diameter="1.7"/>
+<pad name="3V" x="1.27" y="-10.16" drill="0.6" diameter="1.7"/>
+<pad name="AREF" x="1.27" y="-12.7" drill="0.6" diameter="1.7"/>
+<pad name="GND" x="1.27" y="-15.24" drill="0.6" diameter="1.7"/>
+<pad name="14/A0" x="1.27" y="-17.78" drill="0.6" diameter="1.7"/>
+<pad name="15/A1" x="1.27" y="-20.32" drill="0.6" diameter="1.7"/>
+<pad name="16/A2" x="1.27" y="-22.86" drill="0.6" diameter="1.7"/>
+<pad name="17/A3" x="1.27" y="-25.4" drill="0.6" diameter="1.7"/>
+<pad name="18/A4" x="1.27" y="-27.94" drill="0.6" diameter="1.7"/>
+<pad name="19/A5" x="1.27" y="-30.48" drill="0.6" diameter="1.7"/>
+<pad name="24/SCK" x="1.27" y="-33.02" drill="0.6" diameter="1.7"/>
+<pad name="23/MOSI" x="1.27" y="-35.56" drill="0.6" diameter="1.7"/>
+<pad name="22/MISO" x="1.27" y="-38.1" drill="0.6" diameter="1.7"/>
+<pad name="0/RX" x="1.27" y="-40.64" drill="0.6" diameter="1.7"/>
+<pad name="1/TX" x="1.27" y="-43.18" drill="0.6" diameter="1.7"/>
+<pad name="GND1" x="1.27" y="-45.72" drill="0.6" diameter="1.7"/>
+<pad name="VBAT" x="21.59" y="-17.78" drill="0.6" diameter="1.7"/>
+<pad name="EN" x="21.59" y="-20.32" drill="0.6" diameter="1.7"/>
+<pad name="5V" x="21.59" y="-22.86" drill="0.6" diameter="1.7"/>
+<pad name="13" x="21.59" y="-25.4" drill="0.6" diameter="1.7"/>
+<pad name="12" x="21.59" y="-27.94" drill="0.6" diameter="1.7"/>
+<pad name="11" x="21.59" y="-30.48" drill="0.6" diameter="1.7"/>
+<pad name="10" x="21.59" y="-33.02" drill="0.6" diameter="1.7"/>
+<pad name="9/A7" x="21.59" y="-35.56" drill="0.6" diameter="1.7"/>
+<pad name="6" x="21.59" y="-38.1" drill="0.6" diameter="1.7"/>
+<pad name="5" x="21.59" y="-40.64" drill="0.6" diameter="1.7"/>
+<pad name="21/SCL" x="21.59" y="-43.18" drill="0.6" diameter="1.7"/>
+<pad name="20/SDA" x="21.59" y="-45.72" drill="0.6" diameter="1.7"/>
+<wire x1="0" y1="0" x2="0" y2="-50.8" width="0.127" layer="21"/>
+<wire x1="0" y1="-50.8" x2="22.86" y2="-50.8" width="0.127" layer="21"/>
+<wire x1="22.86" y1="-50.8" x2="22.86" y2="0" width="0.127" layer="21"/>
+<wire x1="22.86" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
+<text x="-2.54" y="-2.54" size="1.27" layer="27" rot="SR270">&gt;VALUE</text>
 </package>
 </packages>
 <symbols>
@@ -279,7 +283,7 @@
 </device>
 </devices>
 </deviceset>
-<deviceset name="ADALOGGER_M0">
+<deviceset name="ADALOGGER_M0" uservalue="yes">
 <gates>
 <gate name="G$1" symbol="ADALOGGER_M0" x="-30.48" y="22.86"/>
 </gates>
@@ -317,7 +321,7 @@
 </connects>
 <technologies>
 <technology name="">
-<attribute name="_EXTERNAL_" value="" constant="no"/>
+<attribute name="VALUE" value="Adalogger M0" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -3420,8 +3424,8 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <part name="R1" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="0204/2V" package3d_urn="urn:adsk.eagle:package:6240630/1" value="1 kΩ"/>
 <part name="R5" library="adafruit" library_urn="urn:adsk.eagle:library:420" deviceset="R-US_" device="0204/2V" package3d_urn="urn:adsk.eagle:package:6240630/1" value="1 kΩ"/>
 <part name="U$1" library="Adalogger_32u4" deviceset="GPS" device=""/>
-<part name="U$2" library="Adalogger_32u4" deviceset="ADALOGGER_M0" device=""/>
 <part name="X5" library="con-phoenix-350" library_urn="urn:adsk.eagle:library:174" deviceset="1751303" device="" package3d_urn="urn:adsk.eagle:package:9408/1"/>
+<part name="M0" library="Adalogger_32u4" deviceset="ADALOGGER_M0" device="" value="Adalogger M0"/>
 </parts>
 <sheets>
 <sheet>
@@ -3577,7 +3581,6 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <attribute name="VALUE" x="155.702" y="21.59" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="U$1" gate="G$1" x="53.34" y="-43.18" smashed="yes" rot="R180"/>
-<instance part="U$2" gate="G$1" x="78.74" y="99.06" smashed="yes"/>
 <instance part="X5" gate="-1" x="68.58" y="127" smashed="yes" rot="R90">
 <attribute name="NAME" x="69.469" y="128.27" size="1.778" layer="95" rot="R90"/>
 </instance>
@@ -3602,6 +3605,7 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <instance part="X5" gate="-8" x="121.92" y="127" smashed="yes" rot="R90">
 <attribute name="NAME" x="122.809" y="128.27" size="1.778" layer="95" rot="R90"/>
 </instance>
+<instance part="M0" gate="G$1" x="78.74" y="99.06" smashed="yes"/>
 </instances>
 <busses>
 </busses>
@@ -3612,7 +3616,7 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="144.78" y1="53.34" x2="144.78" y2="-15.24" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="G$1" pin="4A"/>
 <wire x1="144.78" y1="-15.24" x2="114.3" y2="-15.24" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="13"/>
+<pinref part="M0" gate="G$1" pin="13"/>
 </segment>
 </net>
 <net name="N$30" class="0">
@@ -3621,10 +3625,10 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <pinref part="IC2" gate="G$1" pin="3A"/>
 <wire x1="142.24" y1="48.26" x2="142.24" y2="-40.64" width="0.1524" layer="91"/>
 <wire x1="142.24" y1="-40.64" x2="114.3" y2="-40.64" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="12"/>
+<pinref part="M0" gate="G$1" pin="12"/>
 </segment>
 </net>
-<net name="N$32" class="0">
+<net name="L293_1A" class="0">
 <segment>
 <wire x1="124.46" y1="38.1" x2="137.16" y2="38.1" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="38.1" x2="137.16" y2="-2.54" width="0.1524" layer="91"/>
@@ -3632,10 +3636,10 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="78.74" y1="-2.54" x2="78.74" y2="-15.24" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="G$1" pin="1A"/>
 <wire x1="78.74" y1="-15.24" x2="83.82" y2="-15.24" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="10"/>
+<pinref part="M0" gate="G$1" pin="10"/>
 </segment>
 </net>
-<net name="N$33" class="0">
+<net name="L293_2A" class="0">
 <segment>
 <wire x1="124.46" y1="33.02" x2="129.54" y2="33.02" width="0.1524" layer="91"/>
 <wire x1="129.54" y1="33.02" x2="129.54" y2="0" width="0.1524" layer="91"/>
@@ -3643,7 +3647,7 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="76.2" y1="0" x2="76.2" y2="-40.64" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="G$1" pin="2A"/>
 <wire x1="76.2" y1="-40.64" x2="83.82" y2="-40.64" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="9"/>
+<pinref part="M0" gate="G$1" pin="9"/>
 </segment>
 </net>
 <net name="5V" class="0">
@@ -3652,7 +3656,6 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="132.08" y1="58.42" x2="132.08" y2="-10.16" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="G$1" pin="VCC1"/>
 <wire x1="132.08" y1="-10.16" x2="116.84" y2="-10.16" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="VBUS/USB"/>
 <wire x1="116.84" y1="-10.16" x2="114.3" y2="-10.16" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="G$1" pin="VCC2"/>
 <wire x1="83.82" y1="-45.72" x2="81.28" y2="-45.72" width="0.1524" layer="91"/>
@@ -3670,6 +3673,7 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <pinref part="X4" gate="-5" pin="K"/>
 <wire x1="33.02" y1="81.28" x2="55.88" y2="81.28" width="0.1524" layer="91"/>
 <junction x="55.88" y="81.28"/>
+<pinref part="M0" gate="G$1" pin="VBUS/USB"/>
 </segment>
 </net>
 <net name="MOTOR_1_NEG" class="0">
@@ -3721,7 +3725,7 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="147.32" y1="12.7" x2="157.48" y2="12.7" width="0.1524" layer="91"/>
 <wire x1="147.32" y1="20.32" x2="147.32" y2="12.7" width="0.1524" layer="91"/>
 <junction x="147.32" y="12.7"/>
-<pinref part="U$2" gate="G$1" pin="20/SDA"/>
+<pinref part="M0" gate="G$1" pin="20/SDA"/>
 </segment>
 </net>
 <net name="SCL" class="0">
@@ -3734,7 +3738,7 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="152.4" y1="17.78" x2="160.02" y2="17.78" width="0.1524" layer="91"/>
 <wire x1="152.4" y1="20.32" x2="152.4" y2="17.78" width="0.1524" layer="91"/>
 <junction x="152.4" y="17.78"/>
-<pinref part="U$2" gate="G$1" pin="21/SCL"/>
+<pinref part="M0" gate="G$1" pin="21/SCL"/>
 </segment>
 </net>
 <net name="GPS_TX" class="0">
@@ -3744,7 +3748,7 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="53.34" y1="-25.4" x2="63.5" y2="-25.4" width="0.1524" layer="91"/>
 <wire x1="63.5" y1="-25.4" x2="63.5" y2="22.86" width="0.1524" layer="91"/>
 <wire x1="63.5" y1="22.86" x2="73.66" y2="22.86" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="0/RX"/>
+<pinref part="M0" gate="G$1" pin="0/RX"/>
 </segment>
 </net>
 <net name="GPS_RX" class="0">
@@ -3754,7 +3758,7 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="38.1" y1="-22.86" x2="60.96" y2="-22.86" width="0.1524" layer="91"/>
 <wire x1="60.96" y1="-22.86" x2="60.96" y2="17.78" width="0.1524" layer="91"/>
 <wire x1="60.96" y1="17.78" x2="73.66" y2="17.78" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="1/TX"/>
+<pinref part="M0" gate="G$1" pin="1/TX"/>
 </segment>
 </net>
 <net name="3V3" class="0">
@@ -3783,7 +3787,6 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="66.04" y1="83.82" x2="68.58" y2="83.82" width="0.1524" layer="91"/>
 <junction x="68.58" y="83.82"/>
 <junction x="68.58" y="106.68"/>
-<pinref part="U$2" gate="G$1" pin="3V"/>
 <wire x1="40.64" y1="106.68" x2="68.58" y2="106.68" width="0.1524" layer="91"/>
 <pinref part="X5" gate="-6" pin="K"/>
 <wire x1="106.68" y1="124.46" x2="106.68" y2="106.68" width="0.1524" layer="91"/>
@@ -3796,6 +3799,7 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <pinref part="X4" gate="-8" pin="K"/>
 <wire x1="33.02" y1="104.14" x2="40.64" y2="104.14" width="0.1524" layer="91"/>
 <wire x1="40.64" y1="104.14" x2="40.64" y2="106.68" width="0.1524" layer="91"/>
+<pinref part="M0" gate="G$1" pin="3V"/>
 </segment>
 </net>
 <net name="SW_1_2_SIG" class="0">
@@ -3803,7 +3807,6 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="43.18" y1="12.7" x2="43.18" y2="111.76" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="111.76" x2="129.54" y2="111.76" width="0.1524" layer="91"/>
 <wire x1="129.54" y1="111.76" x2="129.54" y2="43.18" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="11"/>
 <wire x1="129.54" y1="43.18" x2="124.46" y2="43.18" width="0.1524" layer="91"/>
 <pinref part="X2" gate="-4" pin="K"/>
 <wire x1="33.02" y1="12.7" x2="38.1" y2="12.7" width="0.1524" layer="91"/>
@@ -3812,25 +3815,26 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="38.1" y1="-2.54" x2="33.02" y2="-2.54" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="12.7" x2="38.1" y2="12.7" width="0.1524" layer="91"/>
 <junction x="38.1" y="12.7"/>
+<pinref part="M0" gate="G$1" pin="11"/>
 </segment>
 </net>
 <net name="THERM_3_SIG" class="0">
 <segment>
-<pinref part="U$2" gate="G$1" pin="16/A2"/>
 <pinref part="X4" gate="-7" pin="K"/>
 <wire x1="58.42" y1="58.42" x2="73.66" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="33.02" y1="96.52" x2="58.42" y2="96.52" width="0.1524" layer="91"/>
 <wire x1="58.42" y1="96.52" x2="58.42" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="M0" gate="G$1" pin="16/A2"/>
 </segment>
 </net>
 <net name="THERM_2_SIG" class="0">
 <segment>
 <wire x1="60.96" y1="116.84" x2="60.96" y2="63.5" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="15/A1"/>
 <wire x1="60.96" y1="63.5" x2="73.66" y2="63.5" width="0.1524" layer="91"/>
 <pinref part="X5" gate="-4" pin="K"/>
 <wire x1="91.44" y1="124.46" x2="91.44" y2="116.84" width="0.1524" layer="91"/>
 <wire x1="91.44" y1="116.84" x2="60.96" y2="116.84" width="0.1524" layer="91"/>
+<pinref part="M0" gate="G$1" pin="15/A1"/>
 </segment>
 </net>
 <net name="THERM_1_SIG" class="0">
@@ -3838,9 +3842,9 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="63.5" y1="119.38" x2="114.3" y2="119.38" width="0.1524" layer="91"/>
 <pinref part="X5" gate="-7" pin="K"/>
 <wire x1="114.3" y1="119.38" x2="114.3" y2="124.46" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="14/A0"/>
 <wire x1="63.5" y1="119.38" x2="63.5" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="63.5" y1="68.58" x2="73.66" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="M0" gate="G$1" pin="14/A0"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -3860,7 +3864,6 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="63.5" y1="-33.02" x2="63.5" y2="-30.48" width="0.1524" layer="91"/>
 <wire x1="63.5" y1="-30.48" x2="68.58" y2="-30.48" width="0.1524" layer="91"/>
 <junction x="68.58" y="-30.48"/>
-<pinref part="U$2" gate="G$1" pin="GND1"/>
 <pinref part="X3" gate="-8" pin="K"/>
 <wire x1="175.26" y1="35.56" x2="172.72" y2="35.56" width="0.1524" layer="91"/>
 <wire x1="172.72" y1="35.56" x2="172.72" y2="27.94" width="0.1524" layer="91"/>
@@ -3921,11 +3924,11 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <pinref part="X4" gate="-2" pin="K"/>
 <wire x1="33.02" y1="58.42" x2="35.56" y2="58.42" width="0.1524" layer="91"/>
 <junction x="35.56" y="58.42"/>
+<pinref part="M0" gate="G$1" pin="GND1"/>
 </segment>
 </net>
 <net name="SW_3_4_SIG" class="0">
 <segment>
-<pinref part="U$2" gate="G$1" pin="19/A5"/>
 <pinref part="X2" gate="-8" pin="K"/>
 <wire x1="38.1" y1="43.18" x2="33.02" y2="43.18" width="0.1524" layer="91"/>
 <wire x1="38.1" y1="43.18" x2="38.1" y2="27.94" width="0.1524" layer="91"/>
@@ -3933,6 +3936,7 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="33.02" y1="27.94" x2="38.1" y2="27.94" width="0.1524" layer="91"/>
 <wire x1="73.66" y1="43.18" x2="38.1" y2="43.18" width="0.1524" layer="91"/>
 <junction x="38.1" y="43.18"/>
+<pinref part="M0" gate="G$1" pin="19/A5"/>
 </segment>
 </net>
 <net name="SW_5_6_SIG" class="0">
@@ -3945,8 +3949,8 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="170.18" y1="73.66" x2="139.7" y2="73.66" width="0.1524" layer="91"/>
 <junction x="170.18" y="73.66"/>
 <wire x1="139.7" y1="73.66" x2="139.7" y2="27.94" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="6"/>
 <wire x1="124.46" y1="27.94" x2="139.7" y2="27.94" width="0.1524" layer="91"/>
+<pinref part="M0" gate="G$1" pin="6"/>
 </segment>
 </net>
 <net name="SW_7_8_SIG" class="0">
@@ -3959,8 +3963,8 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="170.18" y1="43.18" x2="134.62" y2="43.18" width="0.1524" layer="91"/>
 <junction x="170.18" y="43.18"/>
 <wire x1="134.62" y1="43.18" x2="134.62" y2="22.86" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="5"/>
 <wire x1="134.62" y1="22.86" x2="124.46" y2="22.86" width="0.1524" layer="91"/>
+<pinref part="M0" gate="G$1" pin="5"/>
 </segment>
 </net>
 <net name="NEOPIXEL_SIG" class="0">
@@ -3968,8 +3972,8 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <pinref part="X4" gate="-1" pin="K"/>
 <wire x1="33.02" y1="50.8" x2="58.42" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="58.42" y1="50.8" x2="58.42" y2="48.26" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="18/A4"/>
 <wire x1="58.42" y1="48.26" x2="73.66" y2="48.26" width="0.1524" layer="91"/>
+<pinref part="M0" gate="G$1" pin="18/A4"/>
 </segment>
 </net>
 </nets>
