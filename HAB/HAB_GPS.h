@@ -24,16 +24,35 @@ struct GPSTimeData {
   uint8_t hour;
   uint8_t minute;
   uint8_t seconds;
+
+  String description() {
+    return String(year) + "-" +
+          String(month) + "-" +
+          String(day) + " " +
+          String(hour) + ":" +
+          String(minute) + ":" +
+          String(seconds) + " UTC";
+  }
 };
 
-GPSTimeData latestTime;
+struct GPSData {
+  String nmeaSentence;
+  long speed;
+  long course;
+  long altitude;
+  long longitude;
+  long latitude;
+  bool isValid;
+  GPSTimeData time;
+  uint8_t numberOfSatellites;
+};
 
 bool init();
 GPSTimeData getCurrentUtcTime();
-const char* getRawGPSData();
-bool gpsReady();
-bool process();
-long getCurrentAltitude();
+bool isGpsReady();
+GPSData process();
+
+GPSData _data;
 
 } // namespace GPS
 } // namespace HAB
