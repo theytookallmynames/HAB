@@ -38,7 +38,7 @@ void setup() {
 }
 
 void loop() {
-  GPS::GPSData gpsData = GPS::process();
+    GPS::GPSData gpsData = GPS::process();
   
     Door::DoorStatus door1Status = Door::getDoorStatus1();
     Door::DoorStatus door2Status = Door::getDoorStatus2();
@@ -49,9 +49,7 @@ void loop() {
     Sensors::PressureData pressure = Sensors::getPressureData();
 
     Logging::MissionData _data;
-    if(gpsData.isValid) {
-      _data.setGpsData(gpsData);
-    }
+    
     _data.setOnboardTemperature(onboardTemperature);
     _data.setOutdoorTopTemperature(outdoorTopTemperature);
     _data.setOutdoorBottomTemperature(outdoorBottomTemperature);
@@ -63,6 +61,7 @@ void loop() {
     
     if (gpsData.isValid) {
       adjustDoorIfNeeded(gpsData.altitude);
+      _data.setGpsData(gpsData);
     }
    
     Logging::logSystemData(GPS::_data.nmeaSentence);
