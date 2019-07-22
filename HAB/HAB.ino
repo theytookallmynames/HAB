@@ -39,28 +39,33 @@ void setup() {
 
 void loop() {
   GPS::GPSData gpsData = GPS::process();
-  if (gpsData.isValid) {
-    Door::DoorStatus door1Status = Door::getDoorStatus1();
-    Door::DoorStatus door2Status = Door::getDoorStatus2();
-
-    Sensors::TemperatureData onboardTemperature = Sensors::onboardThermistor.getTemperature();
-    Sensors::TemperatureData outdoorTopTemperature = Sensors::outdoorTopThermistor.getTemperature();
-    Sensors::TemperatureData outdoorBottomTemperature = Sensors::outdoorBottomThermistor.getTemperature();
-    Sensors::PressureData pressure = Sensors::getPressureData();
-
-    Logging::MissionData _data;
-    _data.setGpsData(gpsData);
-    _data.setOnboardTemperature(onboardTemperature);
-    _data.setOutdoorTopTemperature(outdoorTopTemperature);
-    _data.setOutdoorBottomTemperature(outdoorBottomTemperature);
-    _data.setPressureData(pressure);
-    _data.setDoor1Status(door1Status);
-    _data.setDoor2Status(door2Status);
   
-    Logging::logMissionData(_data.toString());
-    adjustDoorIfNeeded(gpsData.altitude);
+  Door::DoorStatus door1Status = Door::getDoorStatus1();
+  Door::DoorStatus door2Status = Door::getDoorStatus2();
+
+  Sensors::TemperatureData onboardTemperature = Sensors::onboardThermistor.getTemperature();
+  Sensors::TemperatureData outdoorTopTemperature = Sensors::outdoorTopThermistor.getTemperature();
+  Sensors::TemperatureData outdoorBottomTemperature = Sensors::outdoorBottomThermistor.getTemperature();
+  Sensors::PressureData pressure = Sensors::getPressureData();
+
+  Logging::MissionData _data;
+    
+  _data.setOnboardTemperature(onboardTemperature);
+  _data.setOutdoorTopTemperature(outdoorTopTemperature);
+  _data.setOutdoorBottomTemperature(outdoorBottomTemperature);
+  _data.setPressureData(pressure);
+  _data.setDoor1Status(door1Status);
+  _data.setDoor2Status(door2Status);
+  
+  Logging::logMissionData(_data.toString());
+    
+    if (gpsData.isValid) {
+      adjustDoorIfNeeded(gpsData.altitude);
+      _data.setGpsData(gpsData);
+    }
+   
     Logging::logSystemData(GPS::_data.nmeaSentence);
- }
+    
    delay(1000);
 }
 

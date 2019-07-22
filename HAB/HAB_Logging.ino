@@ -171,13 +171,14 @@ void MissionData::setDoor2Status(Door::DoorStatus door2Status){
 
 uint8_t numberOfSatellites;
 String MissionData::getTitles() {
-      String titles = "TimeStamp(UTC),"
-                  "NMEA sentence,"
-                  "GpsAltitude (meter),"
-                  "Speed (kmh),"
+      String titles = "millisecondsFromStart,"
+                  "timeStamp(UTC),"
+                  "NMEASentence,"
+                  "gpsAltitude (meter),"
+                  "speed (kmh),"
                   "latitude,"
                   "longitude,"
-                  "number of satelites,"
+                  "numberOfSatellites,"
                   "pressureRaw,"
                   "pressureBar,"
                   "onboardTempRaw,"
@@ -200,7 +201,8 @@ String MissionData::toString() {
   nmeaSentence.replace(',','-');
   
   // Creating comma separated sentence for logging into csv file.
-      String missionData = data.gpsData.time.description() + "," + 
+      String missionData = String (millis()) + "," +
+                    data.gpsData.time.description() + "," + 
                     nmeaSentence + "," +
                     String(data.gpsData.altitude) + "," +
                     String(data.gpsData.speed) + "," +
