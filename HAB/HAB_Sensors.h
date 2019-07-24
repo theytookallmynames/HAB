@@ -20,8 +20,8 @@ Thermistor outdoorBottomThermistor = Thermistor(TEMPERATURE_OUTDOOR_BOTTOM_PIN);
  *
  * See page 3 of the Honeywell I2C communication PDF for the conversion formula.
  */
-#define PRESSURE_MIN_OUTPUT 0.0 // Honeywell HSC PDF page 10 table 7
-#define PRESSURE_MAX_OUTPUT 16383.0 // Honeywell HSC PDF page 10 table 7
+#define PRESSURE_MIN_OUTPUT 1638.0 // Honeywell HSC PDF page 10 table 7
+#define PRESSURE_MAX_OUTPUT 14746.0 // Honeywell HSC PDF page 10 table 7
 #define PRESSURE_MIN_PRESSURE 0.0 // Honeywell HSC PDF page 13 figure 4
 #define PRESSURE_MAX_PRESSURE 1.6 // Honeywell HSC PDF page 13 figure 4
 
