@@ -19,7 +19,12 @@ Thermistor outdoorBottomThermistor = Thermistor(TEMPERATURE_OUTDOOR_BOTTOM_PIN);
  * to a usable value in units of bars.
  *
  * See page 3 of the Honeywell I2C communication PDF for the conversion formula.
+ * 
+ * Based on our pressure sensor type, its transfer function was 10% to 90% of 2^14 counts,
+ * therefore pressure min output (10% of 2^14 counts) has to be set to 1638.0 and max output
+ * to 90% of 2^14 counts (14746.0)
  */
+ 
 #define PRESSURE_MIN_OUTPUT 1638.0 // Honeywell HSC PDF page 10 table 7
 #define PRESSURE_MAX_OUTPUT 14746.0 // Honeywell HSC PDF page 10 table 7
 #define PRESSURE_MIN_PRESSURE 0.0 // Honeywell HSC PDF page 13 figure 4
