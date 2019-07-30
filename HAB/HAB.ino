@@ -24,14 +24,13 @@ void setup() {
   /**
    * Door initialization is accomplished by visual inspection of the doors opening and closing.
    */
-  //Door::init();
+  Door::init();
 
   if (!gpsInitSuccess || !loggingInitSuccess || !sensorInitSuccess) {
     Logging::logSystemData("A subsystem failed to initialize properly. Aborting.");
     LED::statusLED(SYSTEM_STATUS_LED, LED::failure);
     return;
   }
-
 
   Logging::logSystemData("All subsystems initialized, starting main loop.");
   LED::statusLED(SYSTEM_STATUS_LED, LED::success);
