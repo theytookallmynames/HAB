@@ -159,12 +159,12 @@
 <library name="Adalogger_32u4">
 <packages>
 <package name="GPS_BREAKOUT">
-<pad name="GND" x="3.81" y="-1.27" drill="0.6" diameter="1.27"/>
-<pad name="VCC" x="6.35" y="-1.27" drill="0.6" diameter="1.27"/>
-<pad name="TXD" x="8.89" y="-1.27" drill="0.6" diameter="1.27"/>
-<pad name="RX" x="11.43" y="-1.27" drill="0.6" diameter="1.27"/>
-<pad name="TX" x="13.97" y="-1.27" drill="0.6" diameter="1.27"/>
-<pad name="RXD" x="16.51" y="-1.27" drill="0.6" diameter="1.27"/>
+<pad name="GND" x="3.81" y="-1.27" drill="0.9" diameter="1.27"/>
+<pad name="VCC" x="6.35" y="-1.27" drill="0.9" diameter="1.27"/>
+<pad name="TXD" x="8.89" y="-1.27" drill="0.9" diameter="1.27"/>
+<pad name="RX" x="11.43" y="-1.27" drill="0.9" diameter="1.27"/>
+<pad name="TX" x="13.97" y="-1.27" drill="0.9" diameter="1.27"/>
+<pad name="RXD" x="16.51" y="-1.27" drill="0.9" diameter="1.27"/>
 <text x="21.59" y="-1.905" size="1.4224" layer="25">GPS</text>
 <wire x1="0" y1="0" x2="0" y2="-13.97" width="0.127" layer="21"/>
 <wire x1="0" y1="-13.97" x2="20.32" y2="-13.97" width="0.127" layer="21"/>
@@ -172,34 +172,34 @@
 <wire x1="20.32" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
 </package>
 <package name="BOARD">
-<pad name="RST" x="1.27" y="-7.62" drill="0.6" diameter="1.7"/>
-<pad name="3V" x="1.27" y="-10.16" drill="0.6" diameter="1.7"/>
-<pad name="AREF" x="1.27" y="-12.7" drill="0.6" diameter="1.7"/>
-<pad name="GND" x="1.27" y="-15.24" drill="0.6" diameter="1.7"/>
-<pad name="14/A0" x="1.27" y="-17.78" drill="0.6" diameter="1.7"/>
-<pad name="15/A1" x="1.27" y="-20.32" drill="0.6" diameter="1.7"/>
-<pad name="16/A2" x="1.27" y="-22.86" drill="0.6" diameter="1.7"/>
-<pad name="17/A3" x="1.27" y="-25.4" drill="0.6" diameter="1.7"/>
-<pad name="18/A4" x="1.27" y="-27.94" drill="0.6" diameter="1.7"/>
-<pad name="19/A5" x="1.27" y="-30.48" drill="0.6" diameter="1.7"/>
-<pad name="24/SCK" x="1.27" y="-33.02" drill="0.6" diameter="1.7"/>
-<pad name="23/MOSI" x="1.27" y="-35.56" drill="0.6" diameter="1.7"/>
-<pad name="22/MISO" x="1.27" y="-38.1" drill="0.6" diameter="1.7"/>
-<pad name="0/RX" x="1.27" y="-40.64" drill="0.6" diameter="1.7"/>
-<pad name="1/TX" x="1.27" y="-43.18" drill="0.6" diameter="1.7"/>
-<pad name="GND1" x="1.27" y="-45.72" drill="0.6" diameter="1.7"/>
-<pad name="VBAT" x="21.59" y="-17.78" drill="0.6" diameter="1.7"/>
-<pad name="EN" x="21.59" y="-20.32" drill="0.6" diameter="1.7"/>
-<pad name="5V" x="21.59" y="-22.86" drill="0.6" diameter="1.7"/>
-<pad name="13" x="21.59" y="-25.4" drill="0.6" diameter="1.7"/>
-<pad name="12" x="21.59" y="-27.94" drill="0.6" diameter="1.7"/>
-<pad name="11" x="21.59" y="-30.48" drill="0.6" diameter="1.7"/>
-<pad name="10" x="21.59" y="-33.02" drill="0.6" diameter="1.7"/>
-<pad name="9/A7" x="21.59" y="-35.56" drill="0.6" diameter="1.7"/>
-<pad name="6" x="21.59" y="-38.1" drill="0.6" diameter="1.7"/>
-<pad name="5" x="21.59" y="-40.64" drill="0.6" diameter="1.7"/>
-<pad name="21/SCL" x="21.59" y="-43.18" drill="0.6" diameter="1.7"/>
-<pad name="20/SDA" x="21.59" y="-45.72" drill="0.6" diameter="1.7"/>
+<pad name="RST" x="1.27" y="-7.62" drill="0.9" diameter="1.7"/>
+<pad name="3V" x="1.27" y="-10.16" drill="0.9" diameter="1.7"/>
+<pad name="AREF" x="1.27" y="-12.7" drill="0.9" diameter="1.7"/>
+<pad name="GND" x="1.27" y="-15.24" drill="0.9" diameter="1.7"/>
+<pad name="14/A0" x="1.27" y="-17.78" drill="0.9" diameter="1.7"/>
+<pad name="15/A1" x="1.27" y="-20.32" drill="0.9" diameter="1.7"/>
+<pad name="16/A2" x="1.27" y="-22.86" drill="0.9" diameter="1.7"/>
+<pad name="17/A3" x="1.27" y="-25.4" drill="0.9" diameter="1.7"/>
+<pad name="18/A4" x="1.27" y="-27.94" drill="0.9" diameter="1.7"/>
+<pad name="19/A5" x="1.27" y="-30.48" drill="0.9" diameter="1.7"/>
+<pad name="24/SCK" x="1.27" y="-33.02" drill="0.9" diameter="1.7"/>
+<pad name="23/MOSI" x="1.27" y="-35.56" drill="0.9" diameter="1.7"/>
+<pad name="22/MISO" x="1.27" y="-38.1" drill="0.9" diameter="1.7"/>
+<pad name="0/RX" x="1.27" y="-40.64" drill="0.9" diameter="1.7"/>
+<pad name="1/TX" x="1.27" y="-43.18" drill="0.9" diameter="1.7"/>
+<pad name="GND1" x="1.27" y="-45.72" drill="0.9" diameter="1.7"/>
+<pad name="VBAT" x="21.59" y="-17.78" drill="0.9" diameter="1.7"/>
+<pad name="EN" x="21.59" y="-20.32" drill="0.9" diameter="1.7"/>
+<pad name="5V" x="21.59" y="-22.86" drill="0.9" diameter="1.7"/>
+<pad name="13" x="21.59" y="-25.4" drill="0.9" diameter="1.7"/>
+<pad name="12" x="21.59" y="-27.94" drill="0.9" diameter="1.7"/>
+<pad name="11" x="21.59" y="-30.48" drill="0.9" diameter="1.7"/>
+<pad name="10" x="21.59" y="-33.02" drill="0.9" diameter="1.7"/>
+<pad name="9/A7" x="21.59" y="-35.56" drill="0.9" diameter="1.7"/>
+<pad name="6" x="21.59" y="-38.1" drill="0.9" diameter="1.7"/>
+<pad name="5" x="21.59" y="-40.64" drill="0.9" diameter="1.7"/>
+<pad name="21/SCL" x="21.59" y="-43.18" drill="0.9" diameter="1.7"/>
+<pad name="20/SDA" x="21.59" y="-45.72" drill="0.9" diameter="1.7"/>
 <wire x1="0" y1="0" x2="0" y2="-50.8" width="0.127" layer="21"/>
 <wire x1="0" y1="-50.8" x2="22.86" y2="-50.8" width="0.127" layer="21"/>
 <wire x1="22.86" y1="-50.8" x2="22.86" y2="0" width="0.127" layer="21"/>
@@ -3674,6 +3674,10 @@ Source: http://eshop.phoenixcontact.com .. .pdf</description>
 <wire x1="33.02" y1="81.28" x2="55.88" y2="81.28" width="0.1524" layer="91"/>
 <junction x="55.88" y="81.28"/>
 <pinref part="M0" gate="G$1" pin="VBUS/USB"/>
+<pinref part="IC2" gate="G$1" pin="1-2EN"/>
+<wire x1="83.82" y1="-10.16" x2="83.82" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="83.82" y1="-5.08" x2="116.84" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="116.84" y1="-5.08" x2="116.84" y2="-10.16" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="MOTOR_1_NEG" class="0">
