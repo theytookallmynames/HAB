@@ -36,11 +36,6 @@ bool init() {
     }
 
     if (millis() - gpsTimeout > GPS_MAX_WAIT) {
-      Logging::logSystemData(
-        "GPS acquisition failed. Timed out after " +
-        String(GPS_MAX_WAIT) +
-        " ms. Aborting."
-      );
       LED::statusLED(GPS_STATUS_LED, LED::failure);
       return false;
     }
@@ -56,8 +51,8 @@ bool init() {
  * Returns true if a complete NMEA sentence has been processed.
  */
 //String sentence = "";
+uint32_t startTime;
 GPSData process() {
-
   while (gps.available(GPSSerial)) {
 //    char c = GPSSerial.read()
 //    sentence += c;
@@ -82,10 +77,21 @@ GPSData process() {
         _data.altitude = fix.altitude() ? : -1;
         _data.numberOfSatellites = fix.satellites;
         _data.isValid = true;
+        startTime = millis();
+        LED::statusLED(GPS_STATUS_LED, LED::success);
         return _data;
     }
   }
-
+  
+  if(millis() - startTime > GPS_MAX_WAIT) {
+      Logging::logSystemData(
+        "GPS acquisition failed. Timed out after " +
+        String(GPS_MAX_WAIT) +
+        " ms. Aborting."
+      );
+      LED::statusLED(GPS_STATUS_LED, LED::failure);
+  }
+  
   _data.isValid = false;
   return _data;
 }

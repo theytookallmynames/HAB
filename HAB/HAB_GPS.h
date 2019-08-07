@@ -29,7 +29,7 @@ struct GPSTimeData {
     return String(year) + "-" +
           String(month) + "-" +
           String(day) + " " +
-          String(hour) + ":" +
+          String(hour) + ":" +    
           String(minute) + ":" +
           String(seconds) + " UTC";
   }
