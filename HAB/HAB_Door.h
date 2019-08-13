@@ -15,6 +15,7 @@ DoorStatus getDoorStatus1();
 DoorStatus getDoorStatus2();
 void openDoor();
 void closeDoor();
+void stopMotor();
 
 } // namespace Door
 } // namespace HAB

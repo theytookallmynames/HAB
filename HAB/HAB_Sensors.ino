@@ -152,6 +152,10 @@ PressureData getPressureData() {
   data.raw = (((int)(firstByte & 0x3f)) << 8) | secondByte;
   data.bar = rawPressureToBar(data.raw);
 
+#ifdef HAB_DEVELOPMENT
+  Serial.println("Pressure | raw: " + String(data.raw) + ", bar: " + String(data.bar));
+#endif
+
   return data;
 }
 

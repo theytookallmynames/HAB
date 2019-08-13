@@ -55,35 +55,42 @@ bool init() {
  * Read and process data from the GPS serial module.
  * Returns true if a complete NMEA sentence has been processed.
  */
-//String sentence = "";
+uint32_t lastValidGpsFix = 0;
 GPSData process() {
-
   while (gps.available(GPSSerial)) {
-//    char c = GPSSerial.read()
-//    sentence += c;
-//
-//    if (gps.decode(c) == NMEAGPS::DECODE_COMPLETED) {
-//      
-//    }
     
-    gps_fix fix = gps.read();
-    bool isValid = fix.valid.time && fix.valid.date && fix.valid.location && fix.valid.altitude;
-    if (isValid) {
-        _data.time.year = fix.dateTime.year;
-        _data.time.month = fix.dateTime.month;
-        _data.time.day = fix.dateTime.date;
-        _data.time.hour = fix.dateTime.hours;
-        _data.time.minute = fix.dateTime.minutes;
-        _data.time.seconds = fix.dateTime.seconds;
-        _data.latitude = fix.latitudeL();
-        _data.longitude = fix.longitudeL();
-        _data.speed = fix.speed_kph();
-        _data.nmeaSentence = gps.string_for(gps.nmeaMessage);
-        _data.altitude = fix.altitude() ? : -1;
-        _data.numberOfSatellites = fix.satellites;
-        _data.isValid = true;
-        return _data;
+  gps_fix fix = gps.read();
+  bool isValid = fix.valid.time && fix.valid.date && fix.valid.location && fix.valid.altitude;
+
+  if (isValid) {
+      _data.time.year = fix.dateTime.year;
+      _data.time.month = fix.dateTime.month;
+      _data.time.day = fix.dateTime.date;
+      _data.time.hour = fix.dateTime.hours;
+      _data.time.minute = fix.dateTime.minutes;
+      _data.time.seconds = fix.dateTime.seconds;
+      _data.latitude = fix.latitudeL();
+      _data.longitude = fix.longitudeL();
+      _data.speed = fix.speed_kph();
+      _data.nmeaSentence = gps.string_for(gps.nmeaMessage);
+      _data.altitude = fix.altitude() ? : -1;
+      _data.numberOfSatellites = fix.satellites;
+      _data.isValid = true;
+
+      lastValidGpsFix = millis();
+      LED::statusLED(GPS_STATUS_LED, LED::success);
+
+      return _data;
     }
+  }
+
+  if (millis() - lastValidGpsFix > GPS_MAX_WAIT) {
+    Logging::logSystemData(
+      "GPS acquisition failed. Timed out after " +
+      String(GPS_MAX_WAIT) +
+      " ms. Aborting."
+    );
+    LED::statusLED(GPS_STATUS_LED, LED::failure);
   }
 
   _data.isValid = false;

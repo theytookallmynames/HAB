@@ -8,6 +8,11 @@
 using namespace HAB;
 
 void setup() {
+  /**
+   * Door initialization is accomplished by visual inspection of the doors opening and closing.
+   */
+  Door::init();
+
   Serial.begin(9600);
 
 // Block until the serial monitor is connected in development
@@ -21,10 +26,6 @@ void setup() {
   bool gpsInitSuccess = GPS::init();
   bool loggingInitSuccess = Logging::init();
   bool sensorInitSuccess = Sensors::init();
-  /**
-   * Door initialization is accomplished by visual inspection of the doors opening and closing.
-   */
-  //Door::init();
 
   if (!gpsInitSuccess || !loggingInitSuccess || !sensorInitSuccess) {
     Logging::logSystemData("A subsystem failed to initialize properly. Aborting.");
@@ -56,7 +57,7 @@ void loop() {
   _data.setPressureData(pressure);
   _data.setDoor1Status(door1Status);
   _data.setDoor2Status(door2Status);
-  
+
   Logging::logMissionData(_data.toString());
     
     if (gpsData.isValid) {
@@ -70,7 +71,6 @@ void loop() {
 }
 
 //Doors opening and closing at 60000 ft
-
 void adjustDoorIfNeeded(long altitude) {
   if (altitude >= MOTOR_OPEN_TRIGGER_ALTITUDE) {
       Door::openDoor();
