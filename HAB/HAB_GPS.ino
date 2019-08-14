@@ -28,11 +28,11 @@ bool init() {
     GPSData data = process();
     if (data.isValid) {
       // We need to wait for a GPRMC message to come in, since that contains the full UTC time and date.
-        Logging::logSystemData(
-          "GPS signal acquired at " +
-          data.time.description()
-        );
-        break;
+      Logging::logSystemData(
+        "GPS signal acquired at " +
+        data.time.description()
+      );
+      break;
     }
 
     if (millis() - gpsTimeout > GPS_MAX_WAIT) {
@@ -56,13 +56,23 @@ bool init() {
  * Returns true if a complete NMEA sentence has been processed.
  */
 uint32_t lastValidGpsFix = 0;
+String currentSentence = "";
 GPSData process() {
-  while (gps.available(GPSSerial)) {
-    
-  gps_fix fix = gps.read();
-  bool isValid = fix.valid.time && fix.valid.date && fix.valid.location && fix.valid.altitude;
+  char currentGPSChar = (char)GPSSerial.peek();
 
-  if (isValid) {
+  if ((' ' <= currentGPSChar) && (currentGPSChar <= '~')) {
+    currentSentence += currentGPSChar;
+  } else if (currentGPSChar == '\n') {
+    _data.nmeaSentence = currentSentence;
+    currentSentence = "";
+    Logging::logSystemData(_data.nmeaSentence);
+  }
+
+  while (gps.available(GPSSerial)) {
+    gps_fix fix = gps.read();
+    bool isValid = fix.valid.time && fix.valid.date && fix.valid.location && fix.valid.altitude;
+
+    if (isValid) {
       _data.time.year = fix.dateTime.year;
       _data.time.month = fix.dateTime.month;
       _data.time.day = fix.dateTime.date;
@@ -72,14 +82,11 @@ GPSData process() {
       _data.latitude = fix.latitudeL();
       _data.longitude = fix.longitudeL();
       _data.speed = fix.speed_kph();
-      _data.nmeaSentence = gps.string_for(gps.nmeaMessage);
-      _data.altitude = fix.altitude() ? : -1;
+      _data.altitude = fix.altitude() ?: -1;
       _data.numberOfSatellites = fix.satellites;
       _data.isValid = true;
 
-      lastValidGpsFix = millis();
       LED::statusLED(GPS_STATUS_LED, LED::success);
-
       return _data;
     }
   }
@@ -93,6 +100,7 @@ GPSData process() {
     LED::statusLED(GPS_STATUS_LED, LED::failure);
   }
 
+  lastValidGpsFix = millis();
   _data.isValid = false;
   return _data;
 }

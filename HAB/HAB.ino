@@ -8,12 +8,12 @@
 using namespace HAB;
 
 void setup() {
+  Serial.begin(9600);
+
   /**
    * Door initialization is accomplished by visual inspection of the doors opening and closing.
    */
   Door::init();
-
-  Serial.begin(9600);
 
 // Block until the serial monitor is connected in development
 #ifdef HAB_DEVELOPMENT
@@ -49,25 +49,25 @@ void loop() {
   Sensors::TemperatureData outdoorBottomTemperature = Sensors::outdoorBottomThermistor.getTemperature();
   Sensors::PressureData pressure = Sensors::getPressureData();
 
-  Logging::MissionData _data;
+  Logging::MissionData data;
     
-  _data.setOnboardTemperature(onboardTemperature);
-  _data.setOutdoorTopTemperature(outdoorTopTemperature);
-  _data.setOutdoorBottomTemperature(outdoorBottomTemperature);
-  _data.setPressureData(pressure);
-  _data.setDoor1Status(door1Status);
-  _data.setDoor2Status(door2Status);
+  data.setOnboardTemperature(onboardTemperature);
+  data.setOutdoorTopTemperature(outdoorTopTemperature);
+  data.setOutdoorBottomTemperature(outdoorBottomTemperature);
+  data.setPressureData(pressure);
+  data.setDoor1Status(door1Status);
+  data.setDoor2Status(door2Status);
+  data.setGpsData(gpsData);
 
-  Logging::logMissionData(_data.toString());
-    
-    if (gpsData.isValid) {
-      adjustDoorIfNeeded(gpsData.altitude);
-      _data.setGpsData(gpsData);
-    }
-   
-    Logging::logSystemData(GPS::_data.nmeaSentence);
-    
-   delay(1000);
+  Logging::logMissionData(data.toString());
+
+  if (gpsData.isValid) {
+    adjustDoorIfNeeded(gpsData.altitude);
+  }
+
+  Logging::logSystemData(gpsData.nmeaSentence);
+
+//  delay(1000);
 }
 
 //Doors opening and closing at 60000 ft

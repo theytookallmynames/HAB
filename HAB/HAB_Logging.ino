@@ -88,9 +88,6 @@ void logSystemData(String data) { String timestamp = "";
  }
 
  if (Serial) {
-   // Serial.print("timestamp length: ");
-   // Serial.println(timestamp.length(), DEC);
-
    if (timestamp.length() != 0) {
      Serial.print(timestamp); Serial.print(" ");
    }
@@ -146,9 +143,9 @@ String createTimestamp() {
   );
 }
 
-  void MissionData::setGpsData(GPS::GPSData gpsData) {
-      data.gpsData = gpsData;
-  }
+void MissionData::setGpsData(GPS::GPSData gpsData) {
+  data.gpsData = gpsData;
+}
 
 void MissionData::setOnboardTemperature(Sensors::TemperatureData onboardTemperature) {
   data.onboardTemperature = onboardTemperature;
@@ -171,57 +168,60 @@ void MissionData::setDoor2Status(Door::DoorStatus door2Status){
 
 uint8_t numberOfSatellites;
 String MissionData::getTitles() {
-      String titles = "millisecondsFromStart,"
-                  "timeStamp(UTC),"
-                  "NMEASentence,"
-                  "gpsAltitude (meter),"
-                  "speed (kmh),"
-                  "latitude,"
-                  "longitude,"
-                  "numberOfSatellites,"
-                  "pressureRaw,"
-                  "pressureBar,"
-                  "onboardTempRaw,"
-                  "onboardTempC,"
-                  "onboardTempF,"
-                  "outdoorTopTempRaw,"
-                  "outdoorTopTempC,"
-                  "outdoorTopTempF,"
-                  "outdoorBottomTempRaw,"
-                  "outdoorBottomTempC,"
-                  "outdoorBottomTempF,"
-                  "door1Status,"
-                  "door2Status";
+  String titles = "millisecondsFromStart,"
+              "timeStamp(UTC),"
+              "NMEASentence,"
+              "gpsAltitude (meter),"
+              "speed (kmh),"
+              "latitude,"
+              "longitude,"
+              "numberOfSatellites,"
+              "pressureRaw,"
+              "pressureBar,"
+              "onboardTempRaw,"
+              "onboardTempC,"
+              "onboardTempF,"
+              "outdoorTopTempRaw,"
+              "outdoorTopTempC,"
+              "outdoorTopTempF,"
+              "outdoorBottomTempRaw,"
+              "outdoorBottomTempC,"
+              "outdoorBottomTempF,"
+              "door1Status,"
+              "door2Status";
+
   return titles;
 }
 
 String MissionData::toString() {
   String nmeaSentence = String(data.gpsData.nmeaSentence);
+
   // CSV creates a column for each GPS value because they are comma separated, this replaces all commas with -
   nmeaSentence.replace(',','-');
   
   // Creating comma separated sentence for logging into csv file.
-      String missionData = String (millis()) + "," +
-                    data.gpsData.time.description() + "," + 
-                    nmeaSentence + "," +
-                    String(data.gpsData.altitude) + "," +
-                    String(data.gpsData.speed) + "," +
-                    String(data.gpsData.latitude) + "," +                       
-                    String(data.gpsData.longitude) + "," +
-                    String(data.gpsData.numberOfSatellites) + "," +
-                    String(data.pressure.raw) + "," +
-                    String(data.pressure.bar) + "," +
-                    String(data.onboardTemperature.raw) + "," +
-                    String(data.onboardTemperature.tempC) + "," +
-                    String(data.onboardTemperature.tempF) + "," +
-                    String(data.outdoorTopTemperature.raw) + "," +
-                    String(data.outdoorTopTemperature.tempC) + "," +
-                    String(data.outdoorTopTemperature.tempF) + "," +
-                    String(data.outdoorBottomTemperature.raw) + "," +
-                    String(data.outdoorBottomTemperature.tempC) + "," +
-                    String(data.outdoorBottomTemperature.tempF) + "," +
-                    String(data.door1Status) + "," +
-                    String(data.door2Status);
+  String missionData = String (millis()) + "," +
+                data.gpsData.time.description() + "," +
+                nmeaSentence + "," +
+                String(data.gpsData.altitude) + "," +
+                String(data.gpsData.speed) + "," +
+                String(data.gpsData.latitude) + "," +
+                String(data.gpsData.longitude) + "," +
+                String(data.gpsData.numberOfSatellites) + "," +
+                String(data.pressure.raw) + "," +
+                String(data.pressure.bar) + "," +
+                String(data.onboardTemperature.raw) + "," +
+                String(data.onboardTemperature.tempC) + "," +
+                String(data.onboardTemperature.tempF) + "," +
+                String(data.outdoorTopTemperature.raw) + "," +
+                String(data.outdoorTopTemperature.tempC) + "," +
+                String(data.outdoorTopTemperature.tempF) + "," +
+                String(data.outdoorBottomTemperature.raw) + "," +
+                String(data.outdoorBottomTemperature.tempC) + "," +
+                String(data.outdoorBottomTemperature.tempF) + "," +
+                String(data.door1Status) + "," +
+                String(data.door2Status);
+
   return missionData;
 }
 
