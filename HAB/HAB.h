@@ -4,10 +4,10 @@
 namespace HAB {
 
 /**
- * With this set to 1, system initialization will wait until the serial monitor is connected
- * to begin operation. Set to 0 or comment it out prior to launch.
+ * With this defined, system initialization will wait until the serial monitor is connected
+ * to begin operation. Comment it out prior to launch.
  */
-#define HAB_DEVELOPMENT 1
+//#define HAB_DEVELOPMENT 1
 
 /**
  * Pins
@@ -38,9 +38,9 @@ namespace HAB {
  * Other constants
  */
 
-// Altitude in millimiters at which the payload door should open/close
-#define MOTOR_OPEN_TRIGGER_ALTITUDE 18288000
-#define MOTOR_CLOSE_TRIGGER_ALTITUDE 16764000
+// Altitude in meters at which the payload door should open/close
+#define MOTOR_OPEN_TRIGGER_ALTITUDE 18288 // 18,288 meters = 60,000 feet
+#define MOTOR_CLOSE_TRIGGER_ALTITUDE 16764 // 16,764 meters = 55,000 feet
 
 } // namespace HAB
 

@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="50" unitdist="mil" unit="mm" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -22,25 +22,25 @@
 <layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
-<layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
-<layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
-<layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
-<layer number="33" name="tFinish" color="6" fill="3" visible="no" active="yes"/>
-<layer number="34" name="bFinish" color="6" fill="6" visible="no" active="yes"/>
-<layer number="35" name="tGlue" color="7" fill="4" visible="no" active="yes"/>
-<layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
-<layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
-<layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="yes" active="yes"/>
+<layer number="30" name="bStop" color="7" fill="6" visible="yes" active="yes"/>
+<layer number="31" name="tCream" color="7" fill="4" visible="yes" active="yes"/>
+<layer number="32" name="bCream" color="7" fill="5" visible="yes" active="yes"/>
+<layer number="33" name="tFinish" color="6" fill="3" visible="yes" active="yes"/>
+<layer number="34" name="bFinish" color="6" fill="6" visible="yes" active="yes"/>
+<layer number="35" name="tGlue" color="7" fill="4" visible="yes" active="yes"/>
+<layer number="36" name="bGlue" color="7" fill="5" visible="yes" active="yes"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
 <layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
-<layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
+<layer number="44" name="Drills" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
-<layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="yes" active="yes"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
@@ -61,48 +61,52 @@
 <library>
 <packages>
 <package name="BOARD">
-<rectangle x1="0" y1="-50.8" x2="22.86" y2="0" layer="21"/>
-<pad name="RST" x="1.27" y="-7.62" drill="0.6" shape="square"/>
-<pad name="3V" x="1.27" y="-10.16" drill="0.6" shape="square"/>
-<pad name="AREF" x="1.27" y="-12.7" drill="0.6" shape="square"/>
-<pad name="GND" x="1.27" y="-15.24" drill="0.6" shape="square"/>
-<pad name="14/A0" x="1.27" y="-17.78" drill="0.6" shape="square"/>
-<pad name="15/A1" x="1.27" y="-20.32" drill="0.6" shape="square"/>
-<pad name="16/A2" x="1.27" y="-22.86" drill="0.6" shape="square"/>
-<pad name="17/A3" x="1.27" y="-25.4" drill="0.6" shape="square"/>
-<pad name="18/A4" x="1.27" y="-27.94" drill="0.6" shape="square"/>
-<pad name="19/A5" x="1.27" y="-30.48" drill="0.6" shape="square"/>
-<pad name="24/SCK" x="1.27" y="-33.02" drill="0.6" shape="square"/>
-<pad name="23/MOSI" x="1.27" y="-35.56" drill="0.6" shape="square"/>
-<pad name="22/MISO" x="1.27" y="-38.1" drill="0.6" shape="square"/>
-<pad name="0/RX" x="1.27" y="-40.64" drill="0.6" shape="square"/>
-<pad name="1/TX" x="1.27" y="-43.18" drill="0.6" shape="square"/>
-<pad name="GND1" x="1.27" y="-45.72" drill="0.6" shape="square"/>
-<pad name="VBAT" x="21.59" y="-17.78" drill="0.6" shape="square"/>
-<pad name="EN" x="21.59" y="-20.32" drill="0.6" shape="square"/>
-<pad name="5V" x="21.59" y="-22.86" drill="0.6" shape="square"/>
-<pad name="13" x="21.59" y="-25.4" drill="0.6" shape="square"/>
-<pad name="12" x="21.59" y="-27.94" drill="0.6" shape="square"/>
-<pad name="11" x="21.59" y="-30.48" drill="0.6" shape="square"/>
-<pad name="10" x="21.59" y="-33.02" drill="0.6" shape="square"/>
-<pad name="9/A7" x="21.59" y="-35.56" drill="0.6" shape="square"/>
-<pad name="6" x="21.59" y="-38.1" drill="0.6" shape="square"/>
-<pad name="5" x="21.59" y="-40.64" drill="0.6" shape="square"/>
-<pad name="21/SCL" x="21.59" y="-43.18" drill="0.6" shape="square"/>
-<pad name="20/SDA" x="21.59" y="-45.72" drill="0.6" shape="square"/>
-<text x="12.7" y="-34.29" size="1.27" layer="21" rot="R90">Adafruit Adalogger M0</text>
-<text x="11.43" y="-34.29" size="1.524" layer="21" rot="R90">Adafruit Adalogger M0</text>
-<text x="12.7" y="-38.1" size="1.778" layer="25" rot="R90">Adafruit Adalogger M0</text>
+<pad name="RST" x="1.27" y="-7.62" drill="0.9" diameter="1.7"/>
+<pad name="3V" x="1.27" y="-10.16" drill="0.9" diameter="1.7"/>
+<pad name="AREF" x="1.27" y="-12.7" drill="0.9" diameter="1.7"/>
+<pad name="GND" x="1.27" y="-15.24" drill="0.9" diameter="1.7"/>
+<pad name="14/A0" x="1.27" y="-17.78" drill="0.9" diameter="1.7"/>
+<pad name="15/A1" x="1.27" y="-20.32" drill="0.9" diameter="1.7"/>
+<pad name="16/A2" x="1.27" y="-22.86" drill="0.9" diameter="1.7"/>
+<pad name="17/A3" x="1.27" y="-25.4" drill="0.9" diameter="1.7"/>
+<pad name="18/A4" x="1.27" y="-27.94" drill="0.9" diameter="1.7"/>
+<pad name="19/A5" x="1.27" y="-30.48" drill="0.9" diameter="1.7"/>
+<pad name="24/SCK" x="1.27" y="-33.02" drill="0.9" diameter="1.7"/>
+<pad name="23/MOSI" x="1.27" y="-35.56" drill="0.9" diameter="1.7"/>
+<pad name="22/MISO" x="1.27" y="-38.1" drill="0.9" diameter="1.7"/>
+<pad name="0/RX" x="1.27" y="-40.64" drill="0.9" diameter="1.7"/>
+<pad name="1/TX" x="1.27" y="-43.18" drill="0.9" diameter="1.7"/>
+<pad name="GND1" x="1.27" y="-45.72" drill="0.9" diameter="1.7"/>
+<pad name="VBAT" x="21.59" y="-17.78" drill="0.9" diameter="1.7"/>
+<pad name="EN" x="21.59" y="-20.32" drill="0.9" diameter="1.7"/>
+<pad name="5V" x="21.59" y="-22.86" drill="0.9" diameter="1.7"/>
+<pad name="13" x="21.59" y="-25.4" drill="0.9" diameter="1.7"/>
+<pad name="12" x="21.59" y="-27.94" drill="0.9" diameter="1.7"/>
+<pad name="11" x="21.59" y="-30.48" drill="0.9" diameter="1.7"/>
+<pad name="10" x="21.59" y="-33.02" drill="0.9" diameter="1.7"/>
+<pad name="9/A7" x="21.59" y="-35.56" drill="0.9" diameter="1.7"/>
+<pad name="6" x="21.59" y="-38.1" drill="0.9" diameter="1.7"/>
+<pad name="5" x="21.59" y="-40.64" drill="0.9" diameter="1.7"/>
+<pad name="21/SCL" x="21.59" y="-43.18" drill="0.9" diameter="1.7"/>
+<pad name="20/SDA" x="21.59" y="-45.72" drill="0.9" diameter="1.7"/>
+<wire x1="0" y1="0" x2="0" y2="-50.8" width="0.127" layer="21"/>
+<wire x1="0" y1="-50.8" x2="22.86" y2="-50.8" width="0.127" layer="21"/>
+<wire x1="22.86" y1="-50.8" x2="22.86" y2="0" width="0.127" layer="21"/>
+<wire x1="22.86" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
+<text x="-2.54" y="-2.54" size="1.27" layer="27" rot="SR270">&gt;VALUE</text>
 </package>
 <package name="GPS_BREAKOUT">
-<rectangle x1="0" y1="-13.97" x2="20.32" y2="0" layer="21"/>
-<pad name="GND" x="3.81" y="-1.27" drill="0.6" shape="square"/>
-<pad name="VCC" x="6.35" y="-1.27" drill="0.6" shape="square"/>
-<pad name="TXD" x="8.89" y="-1.27" drill="0.6" shape="square"/>
-<pad name="RX" x="11.43" y="-1.27" drill="0.6" shape="square"/>
-<pad name="TX" x="13.97" y="-1.27" drill="0.6" shape="square"/>
-<pad name="RXD" x="16.51" y="-1.27" drill="0.6" shape="square"/>
-<text x="16.51" y="-15.875" size="1.4224" layer="25">GPS</text>
+<pad name="GND" x="3.81" y="-1.27" drill="0.9" diameter="1.27"/>
+<pad name="VCC" x="6.35" y="-1.27" drill="0.9" diameter="1.27"/>
+<pad name="TXD" x="8.89" y="-1.27" drill="0.9" diameter="1.27"/>
+<pad name="RX" x="11.43" y="-1.27" drill="0.9" diameter="1.27"/>
+<pad name="TX" x="13.97" y="-1.27" drill="0.9" diameter="1.27"/>
+<pad name="RXD" x="16.51" y="-1.27" drill="0.9" diameter="1.27"/>
+<text x="21.59" y="-1.905" size="1.4224" layer="25">GPS</text>
+<wire x1="0" y1="0" x2="0" y2="-13.97" width="0.127" layer="21"/>
+<wire x1="0" y1="-13.97" x2="20.32" y2="-13.97" width="0.127" layer="21"/>
+<wire x1="20.32" y1="-13.97" x2="20.32" y2="0" width="0.127" layer="21"/>
+<wire x1="20.32" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
 </package>
 <package name="VMA320">
 <rectangle x1="0" y1="-6.35" x2="15.24" y2="0" layer="21"/>
@@ -202,7 +206,7 @@
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="ADALOGGER_M0">
+<deviceset name="ADALOGGER_M0" uservalue="yes">
 <gates>
 <gate name="G$1" symbol="ADALOGGER_M0" x="-30.48" y="22.86"/>
 </gates>
@@ -240,7 +244,7 @@
 </connects>
 <technologies>
 <technology name="">
-<attribute name="_EXTERNAL_" value="" constant="no"/>
+<attribute name="VALUE" value="Adalogger M0" constant="no"/>
 </technology>
 </technologies>
 </device>

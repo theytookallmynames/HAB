@@ -1,27 +1,25 @@
 EAGLE AutoRouter Statistics:
 
-Job           : /Users/samson/Documents/EAGLE/projects/BCC HAB v3/schematic.brd
+Job           : /Users/samson/Desktop/dev/BCC/HAB/electronics/terminals.brd
 
-Start at      : 22:40:35 (5/21/19)
-End at        : 22:40:46 (5/21/19)
-Elapsed time  : 00:00:09
+Start at      : 13:38:32 (7/30/19)
+End at        : 13:38:43 (7/30/19)
+Elapsed time  : 00:00:00
 
-Signals       :    34   RoutingGrid: 6 mil  Layers: 2
-Connections   :    39   predefined:  0 ( 0 Vias )
+Signals       :    26   RoutingGrid: 10 mil  Layers: 2
+Connections   :    56   predefined:  56 ( 27 Vias )
 
-Router memory :   3686528
+Router memory :   667528
 
-Job has been interrupted!
+Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4
 
-Passname          : TopRouter     Route
+Time per pass     :  00:00:00  00:00:00  00:00:00  00:00:00  00:00:00  00:00:00
+Number of Ripups  :         0         0         0         0         0         0
+max. Level        :         0         0         0         0         0         0
+max. Total        :         0         0         0         0         0         0
 
-Time per pass     :  00:00:02  00:00:07
-Number of Ripups  :         0         0
-max. Level        :         0         1
-max. Total        :         0         0
+Routed            :         0         0         0         0         0         0
+Vias              :         0         0         0         0         0         0
+Resolution        :   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
-Routed            :         1        17
-Vias              :         0         0
-Resolution        :     2.6 %    43.6 %
-
-Final             : 43.6% finished
+Final             : 100.0% finished

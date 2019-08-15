@@ -10,6 +10,11 @@ using namespace HAB;
 void setup() {
   Serial.begin(9600);
 
+  /**
+   * Door initialization is accomplished by visual inspection of the doors opening and closing.
+   */
+  Door::init();
+
 // Block until the serial monitor is connected in development
 #ifdef HAB_DEVELOPMENT
   while(!Serial);
@@ -21,10 +26,13 @@ void setup() {
   bool gpsInitSuccess = GPS::init();
   bool loggingInitSuccess = Logging::init();
   bool sensorInitSuccess = Sensors::init();
+<<<<<<< HEAD
   /**
    * Door initialization is accomplished by visual inspection of the doors opening and closing.
    */
   Door::init();
+=======
+>>>>>>> 6da6e3aa66ac1589a2444ab840d5481db7ce6b71
 
   if (!gpsInitSuccess || !loggingInitSuccess || !sensorInitSuccess) {
     Logging::logSystemData("A subsystem failed to initialize properly. Aborting.");
@@ -47,29 +55,28 @@ void loop() {
   Sensors::TemperatureData outdoorBottomTemperature = Sensors::outdoorBottomThermistor.getTemperature();
   Sensors::PressureData pressure = Sensors::getPressureData();
 
-  Logging::MissionData _data;
+  Logging::MissionData data;
     
-  _data.setOnboardTemperature(onboardTemperature);
-  _data.setOutdoorTopTemperature(outdoorTopTemperature);
-  _data.setOutdoorBottomTemperature(outdoorBottomTemperature);
-  _data.setPressureData(pressure);
-  _data.setDoor1Status(door1Status);
-  _data.setDoor2Status(door2Status);
-  
-  Logging::logMissionData(_data.toString());
-    
-    if (gpsData.isValid) {
-      adjustDoorIfNeeded(gpsData.altitude);
-      _data.setGpsData(gpsData);
-    }
-   
-    Logging::logSystemData(GPS::_data.nmeaSentence);
-    
-   delay(1000);
+  data.setOnboardTemperature(onboardTemperature);
+  data.setOutdoorTopTemperature(outdoorTopTemperature);
+  data.setOutdoorBottomTemperature(outdoorBottomTemperature);
+  data.setPressureData(pressure);
+  data.setDoor1Status(door1Status);
+  data.setDoor2Status(door2Status);
+  data.setGpsData(gpsData);
+
+  Logging::logMissionData(data.toString());
+
+  if (gpsData.isValid) {
+    adjustDoorIfNeeded(gpsData.altitude);
+  }
+
+  Logging::logSystemData(gpsData.nmeaSentence);
+
+//  delay(1000);
 }
 
 //Doors opening and closing at 60000 ft
-
 void adjustDoorIfNeeded(long altitude) {
   if (altitude >= MOTOR_OPEN_TRIGGER_ALTITUDE) {
       Door::openDoor();
