@@ -26,13 +26,10 @@ void setup() {
   bool gpsInitSuccess = GPS::init();
   bool loggingInitSuccess = Logging::init();
   bool sensorInitSuccess = Sensors::init();
-<<<<<<< HEAD
   /**
    * Door initialization is accomplished by visual inspection of the doors opening and closing.
    */
   Door::init();
-=======
->>>>>>> 6da6e3aa66ac1589a2444ab840d5481db7ce6b71
 
   if (!gpsInitSuccess || !loggingInitSuccess || !sensorInitSuccess) {
     Logging::logSystemData("A subsystem failed to initialize properly. Aborting.");
