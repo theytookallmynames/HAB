@@ -106,7 +106,9 @@ void openDoor() {
        isOpening = false;
     }
   }
-  Logging::logSystemData("Door 1 finished opening");
+  if(isOpening) {
+    Logging::logSystemData("Door 1 finished opening");
+  }
   stopMotor();
 
   // Open door 2
@@ -127,7 +129,9 @@ void openDoor() {
       isOpening = false;
     }
   }
-  Logging::logSystemData("Door 2 finished opening");
+  if(isOpening) {
+    Logging::logSystemData("Door 2 finished opening");
+  }
   stopMotor();
 }
 
@@ -161,7 +165,10 @@ void closeDoor() {
       isClosing = false;
     }
   }
-  Logging::logSystemData("Door 1 finished closing");
+  
+  if(isClosing) {
+    Logging::logSystemData("Door 1 finished closing");
+  }
   stopMotor();
 
   // Close Door 2
@@ -182,7 +189,9 @@ void closeDoor() {
       isClosing = false;
     }
   }
-  Logging::logSystemData("Door 2 finished closing");
+  if(isClosing) {
+    Logging::logSystemData("Door 2 finished closing");
+  }
   stopMotor();
 }
 
